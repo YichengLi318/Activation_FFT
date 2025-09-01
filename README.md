@@ -1,22 +1,25 @@
-## Fourier_Interpreter (demo)
-# 模型
+# Fourier_Interpreter (demo)
+## 模型
 GPT-2 large，参数量为774M，隐藏层数为36，hidden dimension为1280。
-# 测试用例
-形如  
+## 测试用例
+一个句子对，其内容为**语法(syntax)**或**数学(math)**，每个大类型下面还有多个细分类型。可以在dataset文件中查看所有测试用例。其形式如
 {
-    "name": "Subject-Verb-Agreement",
-    "A": "The key to the doors is lost.",
-    "B": "The key to the doors are lost.",
-    "target_word_A": "is",
-    "target_word_B": "are"
-}，  
-保证：
-1. A和B的token数相同
-2. A和B只有一个token不同，这个token标记为target_word
-3. A是正确的，而B是错误的。
-# 处理
-将A和B输入模型，测量每个token在每一层的激活向量，并执行FFT。将A和B频谱的差值最终绘制3D图：  
-x轴：频率  
-y轴：层数  
-z轴：幅度  
-对target_word的激活和句子中除了target_word之外的其他所有词的平均激活同时执行上面的操作。结果储存在output文件夹中。
+    "catalog": "syntax",
+    "type": "Subject-Verb-Agreement",
+    "id": 1,
+    "A": "The cat sleeps on the sofa all day.",
+    "B": "The cat sleep on the sofa all day.",
+    "target_word_A": "sleeps",
+    "target_word_B": "sleep"
+}
+具有以下性质：
+1. A是正确的，而B是错误的
+2. A和B的token数相同
+3. A和B只有一个token不同，这个token标记为target_word。
+## 数据处理
+将A和B输入模型，测量每个token在每一层的激活向量，并执行FFT，激活值的频谱被保存在output/data下面。 
+将模型每一层执行所有任务产生的激活频谱绘制为可交互页面，用户可以选择单独查看不同类型任务在该层产生的激活频谱。 
+正确句子、错误句子和二者差值所对应的频谱其命名前缀分别带有sentence_A、sentence_B和diff。
+## 几个有趣的事实
+1. 在浅层，语法任务的频谱差值和数学任务没有明显区别；而在深层，语法任务的频谱差值则远大于数学任务。
+2. 在浅层和深层，频谱的幅值较小，而在中层，频谱的幅值非常大。这一点对于语法任务更加显著。

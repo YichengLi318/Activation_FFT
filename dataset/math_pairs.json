@@ -1,0 +1,137 @@
+[
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 1,
+        "A": "The sum of 100 and 50 is 150.",
+        "B": "The sum of 100 and 50 is 160.",
+        "target_word_A": "150",
+        "target_word_B": "160"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 2,
+        "A": "Subtracting 75 from 200 gives 125.",
+        "B": "Subtracting 75 from 200 gives 135.",
+        "target_word_A": "125",
+        "target_word_B": "135"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 3,
+        "A": "Multiplying 12 by 15 gives 180.",
+        "B": "Multiplying 12 by 15 gives 170.",
+        "target_word_A": "180",
+        "target_word_B": "170"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 4,
+        "A": "Dividing 300 by 6 equals 50.",
+        "B": "Dividing 300 by 6 equals 60.",
+        "target_word_A": "50",
+        "target_word_B": "60"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 5,
+        "A": "The product of 9 and 11 is 99.",
+        "B": "The product of 9 and 11 is 100.",
+        "target_word_A": "99",
+        "target_word_B": "100"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 6,
+        "A": "If x + 10 = 25, then x is 15.",
+        "B": "If x + 10 = 25, then x is 14.",
+        "target_word_A": "15",
+        "target_word_B": "14"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 7,
+        "A": "Solving y - 5 = 20 gives y = 25.",
+        "B": "Solving y - 5 = 20 gives y = 24.",
+        "target_word_A": "25",
+        "target_word_B": "24"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 8,
+        "A": "For 4z = 48, z equals 12.",
+        "B": "For 4z = 48, z equals 13.",
+        "target_word_A": "12",
+        "target_word_B": "13"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 9,
+        "A": "When 100 / a = 20, a is 5.",
+        "B": "When 100 / a = 20, a is 4.",
+        "target_word_A": "5",
+        "target_word_B": "4"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 10,
+        "A": "If 2b + 3 = 19, then b is 8.",
+        "B": "If 2b + 3 = 19, then b is 9.",
+        "target_word_A": "8",
+        "target_word_B": "9"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 11,
+        "A": "If you buy 5 apples costing $2 each, the total cost is $10.",
+        "B": "If you buy 5 apples costing $2 each, the total cost is $12.",
+        "target_word_A": "10",
+        "target_word_B": "12"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 12,
+        "A": "A car travels at 60 km/h for 3 hours, so it covers 180 km.",
+        "B": "A car travels at 60 km/h for 3 hours, so it covers 170 km.",
+        "target_word_A": "180",
+        "target_word_B": "170"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 13,
+        "A": "A rectangle with length 15 cm and width 10 cm has an area of 150 square cm.",
+        "B": "A rectangle with length 15 cm and width 10 cm has an area of 160 square cm.",
+        "target_word_A": "150",
+        "target_word_B": "160"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 14,
+        "A": "A town has 500 people and grows by 50 each year, so after one year it has 550 people.",
+        "B": "A town has 500 people and grows by 50 each year, so after one year it has 540 people.",
+        "target_word_A": "550",
+        "target_word_B": "540"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 15,
+        "A": "A $200 item with a 20% discount costs $160.",
+        "B": "A $200 item with a 20% discount costs $150.",
+        "target_word_A": "160",
+        "target_word_B": "150"
+    }
+]

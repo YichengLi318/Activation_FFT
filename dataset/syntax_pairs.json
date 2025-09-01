@@ -1,0 +1,137 @@
+[
+    {
+        "catalog": "syntax",
+        "type": "Subject-Verb-Agreement",
+        "id": 1,
+        "A": "The cat sleeps on the sofa all day.",
+        "B": "The cat sleep on the sofa all day.",
+        "target_word_A": "sleeps",
+        "target_word_B": "sleep"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Subject-Verb-Agreement",
+        "id": 2,
+        "A": "Dogs bark loudly at night.",
+        "B": "Dogs barks loudly at night.",
+        "target_word_A": "bark",
+        "target_word_B": "barks"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Subject-Verb-Agreement",
+        "id": 3,
+        "A": "She writes poems every morning.",
+        "B": "She write poems every morning.",
+        "target_word_A": "writes",
+        "target_word_B": "write"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Subject-Verb-Agreement",
+        "id": 4,
+        "A": "He runs fast in the race.",
+        "B": "He run fast in the race.",
+        "target_word_A": "runs",
+        "target_word_B": "run"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Subject-Verb-Agreement",
+        "id": 5,
+        "A": "Birds fly south in winter.",
+        "B": "Birds flies south in winter.",
+        "target_word_A": "fly",
+        "target_word_B": "flies"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Verb-Tense-Consistency",
+        "id": 6,
+        "A": "I studied English yesterday.",
+        "B": "I study English yesterday.",
+        "target_word_A": "studied",
+        "target_word_B": "study"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Verb-Tense-Consistency",
+        "id": 7,
+        "A": "They played soccer last weekend.",
+        "B": "They play soccer last weekend.",
+        "target_word_A": "played",
+        "target_word_B": "play"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Verb-Tense-Consistency",
+        "id": 8,
+        "A": "He watched a movie last night.",
+        "B": "He watches a movie last night.",
+        "target_word_A": "watched",
+        "target_word_B": "watches"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Verb-Tense-Consistency",
+        "id": 9,
+        "A": "We visited Paris last summer.",
+        "B": "We visit Paris last summer.",
+        "target_word_A": "visited",
+        "target_word_B": "visit"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Verb-Tense-Consistency",
+        "id": 10,
+        "A": "She cooked dinner yesterday.",
+        "B": "She cooks dinner yesterday.",
+        "target_word_A": "cooked",
+        "target_word_B": "cooks"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Determiner-Noun-Agreement",
+        "id": 11,
+        "A": "She ate an apple for breakfast.",
+        "B": "She ate a apple for breakfast.",
+        "target_word_A": "an",
+        "target_word_B": "a"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Determiner-Noun-Agreement",
+        "id": 12,
+        "A": "I need a uniform for school.",
+        "B": "I need an uniform for school.",
+        "target_word_A": "a",
+        "target_word_B": "an"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Determiner-Noun-Agreement",
+        "id": 13,
+        "A": "He bought an umbrella yesterday.",
+        "B": "He bought a umbrella yesterday.",
+        "target_word_A": "an",
+        "target_word_B": "a"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Determiner-Noun-Agreement",
+        "id": 14,
+        "A": "She is an honest person.",
+        "B": "She is a honest person.",
+        "target_word_A": "an",
+        "target_word_B": "a"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Determiner-Noun-Agreement",
+        "id": 15,
+        "A": "It was an hour-long meeting.",
+        "B": "It was a hour-long meeting.",
+        "target_word_A": "an",
+        "target_word_B": "a"
+    }
+]

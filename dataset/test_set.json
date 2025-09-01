@@ -1,0 +1,56 @@
+[
+    {
+        "catalog": "syntax",
+        "type": "Subject-Verb-Agreement",
+        "id": 1,
+        "A": "The cat sleeps on the sofa all day.",
+        "B": "The cat sleep on the sofa all day.",
+        "target_word_A": "sleeps",
+        "target_word_B": "sleep"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Verb-Tense-Consistency",
+        "id": 6,
+        "A": "I studied English yesterday.",
+        "B": "I study English yesterday.",
+        "target_word_A": "studied",
+        "target_word_B": "study"
+    },
+    {
+        "catalog": "syntax",
+        "type": "Determiner-Noun-Agreement",
+        "id": 13,
+        "A": "He bought an umbrella yesterday.",
+        "B": "He bought a umbrella yesterday.",
+        "target_word_A": "an",
+        "target_word_B": "a"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 2,
+        "A": "Subtracting 75 from 200 gives 125.",
+        "B": "Subtracting 75 from 200 gives 135.",
+        "target_word_A": "125",
+        "target_word_B": "135"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 7,
+        "A": "Solving y - 5 = 20 gives y = 25.",
+        "B": "Solving y - 5 = 20 gives y = 24.",
+        "target_word_A": "25",
+        "target_word_B": "24"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 12,
+        "A": "A car travels at 60 km/h for 3 hours, so it covers 180 km.",
+        "B": "A car travels at 60 km/h for 3 hours, so it covers 170 km.",
+        "target_word_A": "180",
+        "target_word_B": "170"
+    }
+]
