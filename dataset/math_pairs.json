@@ -46,8 +46,863 @@
     },
     {
         "catalog": "math",
-        "type": "Equation",
+        "type": "Arithmetic",
         "id": 6,
+        "A": "The difference of 67 and 19 is 48.",
+        "B": "The difference of 67 and 19 is 43.",
+        "target_word_A": "48",
+        "target_word_B": "43"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 7,
+        "A": "The sum of 80 and 55 is 135.",
+        "B": "The sum of 80 and 55 is 143.",
+        "target_word_A": "135",
+        "target_word_B": "143"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 8,
+        "A": "The sum of 24 and 70 is 94.",
+        "B": "The sum of 24 and 70 is 96.",
+        "target_word_A": "94",
+        "target_word_B": "96"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 9,
+        "A": "The product of 9 and 19 is 171.",
+        "B": "The product of 9 and 19 is 180.",
+        "target_word_A": "171",
+        "target_word_B": "180"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 10,
+        "A": "The difference of 68 and 55 is 13.",
+        "B": "The difference of 68 and 55 is 5.",
+        "target_word_A": "13",
+        "target_word_B": "5"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 11,
+        "A": "The product of 46 and 8 is 368.",
+        "B": "The product of 46 and 8 is 375.",
+        "target_word_A": "368",
+        "target_word_B": "375"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 12,
+        "A": "The product of 54 and 7 is 378.",
+        "B": "The product of 54 and 7 is 384.",
+        "target_word_A": "378",
+        "target_word_B": "384"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 13,
+        "A": "The product of 89 and 6 is 534.",
+        "B": "The product of 89 and 6 is 535.",
+        "target_word_A": "534",
+        "target_word_B": "535"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 14,
+        "A": "The difference of 90 and 89 is 1.",
+        "B": "The difference of 90 and 89 is 2.",
+        "target_word_A": "1",
+        "target_word_B": "2"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 15,
+        "A": "The quotient of 300 and 75 is 4.",
+        "B": "The quotient of 300 and 75 is 5.",
+        "target_word_A": "4",
+        "target_word_B": "5"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 16,
+        "A": "The product of 13 and 6 is 78.",
+        "B": "The product of 13 and 6 is 82.",
+        "target_word_A": "78",
+        "target_word_B": "82"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 17,
+        "A": "The difference of 74 and 55 is 19.",
+        "B": "The difference of 74 and 55 is 12.",
+        "target_word_A": "19",
+        "target_word_B": "12"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 18,
+        "A": "The difference of 41 and 33 is 8.",
+        "B": "The difference of 41 and 33 is 11.",
+        "target_word_A": "8",
+        "target_word_B": "11"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 19,
+        "A": "The product of 7 and 7 is 49.",
+        "B": "The product of 7 and 7 is 50.",
+        "target_word_A": "49",
+        "target_word_B": "50"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 20,
+        "A": "The product of 66 and 10 is 660.",
+        "B": "The product of 66 and 10 is 662.",
+        "target_word_A": "660",
+        "target_word_B": "662"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 21,
+        "A": "The sum of 89 and 59 is 148.",
+        "B": "The sum of 89 and 59 is 152.",
+        "target_word_A": "148",
+        "target_word_B": "152"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 22,
+        "A": "The product of 40 and 20 is 800.",
+        "B": "The product of 40 and 20 is 803.",
+        "target_word_A": "800",
+        "target_word_B": "803"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 23,
+        "A": "The difference of 60 and 8 is 52.",
+        "B": "The difference of 60 and 8 is 46.",
+        "target_word_A": "52",
+        "target_word_B": "46"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 24,
+        "A": "The product of 69 and 5 is 345.",
+        "B": "The product of 69 and 5 is 348.",
+        "target_word_A": "345",
+        "target_word_B": "348"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 25,
+        "A": "The difference of 98 and 84 is 14.",
+        "B": "The difference of 98 and 84 is 13.",
+        "target_word_A": "14",
+        "target_word_B": "13"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 26,
+        "A": "The quotient of 90 and 30 is 3.",
+        "B": "The quotient of 90 and 30 is 4.",
+        "target_word_A": "3",
+        "target_word_B": "4"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 27,
+        "A": "The quotient of 80 and 20 is 4.",
+        "B": "The quotient of 80 and 20 is 5.",
+        "target_word_A": "4",
+        "target_word_B": "5"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 28,
+        "A": "The product of 56 and 10 is 560.",
+        "B": "The product of 56 and 10 is 570.",
+        "target_word_A": "560",
+        "target_word_B": "570"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 29,
+        "A": "The quotient of 98 and 16 is 6.",
+        "B": "The quotient of 98 and 16 is 9.",
+        "target_word_A": "6",
+        "target_word_B": "9"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 30,
+        "A": "The quotient of 50 and 25 is 2.",
+        "B": "The quotient of 50 and 25 is 3.",
+        "target_word_A": "2",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 31,
+        "A": "The sum of 65 and 1 is 66.",
+        "B": "The sum of 65 and 1 is 69.",
+        "target_word_A": "66",
+        "target_word_B": "69"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 32,
+        "A": "The sum of 96 and 33 is 129.",
+        "B": "The sum of 96 and 33 is 133.",
+        "target_word_A": "129",
+        "target_word_B": "133"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 33,
+        "A": "The difference of 81 and 10 is 71.",
+        "B": "The difference of 81 and 10 is 67.",
+        "target_word_A": "71",
+        "target_word_B": "67"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 34,
+        "A": "The product of 78 and 6 is 468.",
+        "B": "The product of 78 and 6 is 470.",
+        "target_word_A": "468",
+        "target_word_B": "470"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 35,
+        "A": "The sum of 31 and 88 is 119.",
+        "B": "The sum of 31 and 88 is 127.",
+        "target_word_A": "119",
+        "target_word_B": "127"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 36,
+        "A": "The product of 92 and 2 is 184.",
+        "B": "The product of 92 and 2 is 188.",
+        "target_word_A": "184",
+        "target_word_B": "188"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 37,
+        "A": "The sum of 69 and 29 is 98.",
+        "B": "The sum of 69 and 29 is 103.",
+        "target_word_A": "98",
+        "target_word_B": "103"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 38,
+        "A": "The difference of 96 and 28 is 68.",
+        "B": "The difference of 96 and 28 is 69.",
+        "target_word_A": "68",
+        "target_word_B": "69"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 39,
+        "A": "The product of 64 and 9 is 576.",
+        "B": "The product of 64 and 9 is 580.",
+        "target_word_A": "576",
+        "target_word_B": "580"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 40,
+        "A": "The difference of 72 and 62 is 10.",
+        "B": "The difference of 72 and 62 is 6.",
+        "target_word_A": "10",
+        "target_word_B": "6"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 41,
+        "A": "The product of 79 and 10 is 790.",
+        "B": "The product of 79 and 10 is 793.",
+        "target_word_A": "790",
+        "target_word_B": "793"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 42,
+        "A": "The sum of 5 and 69 is 74.",
+        "B": "The sum of 5 and 69 is 79.",
+        "target_word_A": "74",
+        "target_word_B": "79"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 43,
+        "A": "The difference of 22 and 7 is 15.",
+        "B": "The difference of 22 and 7 is 23.",
+        "target_word_A": "15",
+        "target_word_B": "23"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 44,
+        "A": "The difference of 69 and 2 is 67.",
+        "B": "The difference of 69 and 2 is 62.",
+        "target_word_A": "67",
+        "target_word_B": "62"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 45,
+        "A": "The sum of 62 and 97 is 159.",
+        "B": "The sum of 62 and 97 is 167.",
+        "target_word_A": "159",
+        "target_word_B": "167"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 46,
+        "A": "The quotient of 80 and 40 is 2.",
+        "B": "The quotient of 80 and 40 is 3.",
+        "target_word_A": "2",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 47,
+        "A": "The sum of 98 and 61 is 159.",
+        "B": "The sum of 98 and 61 is 167.",
+        "target_word_A": "159",
+        "target_word_B": "167"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 48,
+        "A": "The quotient of 40 and 10 is 4.",
+        "B": "The quotient of 40 and 10 is 5.",
+        "target_word_A": "4",
+        "target_word_B": "5"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 49,
+        "A": "The sum of 75 and 75 is 150.",
+        "B": "The sum of 75 and 75 is 153.",
+        "target_word_A": "150",
+        "target_word_B": "153"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 50,
+        "A": "The sum of 48 and 56 is 104.",
+        "B": "The sum of 48 and 56 is 109.",
+        "target_word_A": "104",
+        "target_word_B": "109"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 51,
+        "A": "The sum of 75 and 97 is 172.",
+        "B": "The sum of 75 and 97 is 180.",
+        "target_word_A": "172",
+        "target_word_B": "180"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 52,
+        "A": "The sum of 13 and 9 is 22.",
+        "B": "The sum of 13 and 9 is 25.",
+        "target_word_A": "22",
+        "target_word_B": "25"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 53,
+        "A": "The difference of 86 and 10 is 76.",
+        "B": "The difference of 86 and 10 is 74.",
+        "target_word_A": "76",
+        "target_word_B": "74"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 54,
+        "A": "The difference of 39 and 26 is 13.",
+        "B": "The difference of 39 and 26 is 6.",
+        "target_word_A": "13",
+        "target_word_B": "6"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 55,
+        "A": "The sum of 59 and 38 is 97.",
+        "B": "The sum of 59 and 38 is 104.",
+        "target_word_A": "97",
+        "target_word_B": "104"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 56,
+        "A": "The sum of 11 and 96 is 107.",
+        "B": "The sum of 11 and 96 is 114.",
+        "target_word_A": "107",
+        "target_word_B": "114"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 57,
+        "A": "The difference of 26 and 24 is 2.",
+        "B": "The difference of 26 and 24 is 3.",
+        "target_word_A": "2",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 58,
+        "A": "The difference of 100 and 40 is 60.",
+        "B": "The difference of 100 and 40 is 59.",
+        "target_word_A": "60",
+        "target_word_B": "59"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 59,
+        "A": "The quotient of 85 and 41 is 2.",
+        "B": "The quotient of 85 and 41 is 3.",
+        "target_word_A": "2",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 60,
+        "A": "The product of 78 and 9 is 702.",
+        "B": "The product of 78 and 9 is 710.",
+        "target_word_A": "702",
+        "target_word_B": "710"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 61,
+        "A": "The difference of 43 and 22 is 21.",
+        "B": "The difference of 43 and 22 is 20.",
+        "target_word_A": "21",
+        "target_word_B": "20"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 62,
+        "A": "The sum of 65 and 43 is 108.",
+        "B": "The sum of 65 and 43 is 116.",
+        "target_word_A": "108",
+        "target_word_B": "116"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 63,
+        "A": "The quotient of 66 and 33 is 2.",
+        "B": "The quotient of 66 and 33 is 3.",
+        "target_word_A": "2",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 64,
+        "A": "The quotient of 54 and 27 is 2.",
+        "B": "The quotient of 54 and 27 is 3.",
+        "target_word_A": "2",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 65,
+        "A": "The product of 43 and 6 is 258.",
+        "B": "The product of 43 and 6 is 263.",
+        "target_word_A": "258",
+        "target_word_B": "263"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 66,
+        "A": "The difference of 59 and 15 is 44.",
+        "B": "The difference of 59 and 15 is 49.",
+        "target_word_A": "44",
+        "target_word_B": "49"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 67,
+        "A": "The sum of 39 and 37 is 76.",
+        "B": "The sum of 39 and 37 is 84.",
+        "target_word_A": "76",
+        "target_word_B": "84"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 68,
+        "A": "The quotient of 60 and 30 is 2.",
+        "B": "The quotient of 60 and 30 is 3.",
+        "target_word_A": "2",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 69,
+        "A": "The sum of 54 and 79 is 133.",
+        "B": "The sum of 54 and 79 is 143.",
+        "target_word_A": "133",
+        "target_word_B": "143"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 70,
+        "A": "The difference of 62 and 10 is 52.",
+        "B": "The difference of 62 and 10 is 49.",
+        "target_word_A": "52",
+        "target_word_B": "49"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 71,
+        "A": "The quotient of 96 and 48 is 2.",
+        "B": "The quotient of 96 and 48 is 3.",
+        "target_word_A": "2",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 72,
+        "A": "The sum of 48 and 27 is 75.",
+        "B": "The sum of 48 and 27 is 82.",
+        "target_word_A": "75",
+        "target_word_B": "82"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 73,
+        "A": "The quotient of 16 and 2 is 8.",
+        "B": "The quotient of 16 and 2 is 10.",
+        "target_word_A": "8",
+        "target_word_B": "10"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 74,
+        "A": "The difference of 39 and 26 is 13.",
+        "B": "The difference of 39 and 26 is 23.",
+        "target_word_A": "13",
+        "target_word_B": "23"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 75,
+        "A": "The product of 43 and 15 is 645.",
+        "B": "The product of 43 and 15 is 648.",
+        "target_word_A": "645",
+        "target_word_B": "648"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 76,
+        "A": "The difference of 79 and 22 is 57.",
+        "B": "The difference of 79 and 22 is 52.",
+        "target_word_A": "57",
+        "target_word_B": "52"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 77,
+        "A": "The difference of 84 and 77 is 7.",
+        "B": "The difference of 84 and 77 is 14.",
+        "target_word_A": "7",
+        "target_word_B": "14"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 78,
+        "A": "The difference of 14 and 11 is 3.",
+        "B": "The difference of 14 and 11 is 4.",
+        "target_word_A": "3",
+        "target_word_B": "4"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 79,
+        "A": "The quotient of 36 and 12 is 3.",
+        "B": "The quotient of 36 and 12 is 4.",
+        "target_word_A": "3",
+        "target_word_B": "4"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 80,
+        "A": "The difference of 73 and 14 is 59.",
+        "B": "The difference of 73 and 14 is 66.",
+        "target_word_A": "59",
+        "target_word_B": "66"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 81,
+        "A": "The sum of 18 and 92 is 110.",
+        "B": "The sum of 18 and 92 is 120.",
+        "target_word_A": "110",
+        "target_word_B": "120"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 82,
+        "A": "The quotient of 72 and 36 is 2.",
+        "B": "The quotient of 72 and 36 is 3.",
+        "target_word_A": "2",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 83,
+        "A": "The sum of 26 and 72 is 98.",
+        "B": "The sum of 26 and 72 is 99.",
+        "target_word_A": "98",
+        "target_word_B": "99"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 84,
+        "A": "The product of 63 and 10 is 630.",
+        "B": "The product of 63 and 10 is 635.",
+        "target_word_A": "630",
+        "target_word_B": "635"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 85,
+        "A": "The product of 80 and 10 is 800.",
+        "B": "The product of 80 and 10 is 804.",
+        "target_word_A": "800",
+        "target_word_B": "804"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 86,
+        "A": "The product of 95 and 10 is 950.",
+        "B": "The product of 95 and 10 is 958.",
+        "target_word_A": "950",
+        "target_word_B": "958"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 87,
+        "A": "The sum of 23 and 21 is 44.",
+        "B": "The sum of 23 and 21 is 48.",
+        "target_word_A": "44",
+        "target_word_B": "48"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 88,
+        "A": "The product of 39 and 4 is 156.",
+        "B": "The product of 39 and 4 is 163.",
+        "target_word_A": "156",
+        "target_word_B": "163"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 89,
+        "A": "The product of 71 and 10 is 710.",
+        "B": "The product of 71 and 10 is 719.",
+        "target_word_A": "710",
+        "target_word_B": "719"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 90,
+        "A": "The difference of 77 and 34 is 43.",
+        "B": "The difference of 77 and 34 is 38.",
+        "target_word_A": "43",
+        "target_word_B": "38"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 91,
+        "A": "The difference of 64 and 50 is 14.",
+        "B": "The difference of 64 and 50 is 8.",
+        "target_word_A": "14",
+        "target_word_B": "8"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 92,
+        "A": "The quotient of 36 and 12 is 3.",
+        "B": "The quotient of 36 and 12 is 4.",
+        "target_word_A": "3",
+        "target_word_B": "4"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 93,
+        "A": "The sum of 81 and 18 is 99.",
+        "B": "The sum of 81 and 18 is 104.",
+        "target_word_A": "99",
+        "target_word_B": "104"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 94,
+        "A": "The difference of 88 and 5 is 83.",
+        "B": "The difference of 88 and 5 is 77.",
+        "target_word_A": "83",
+        "target_word_B": "77"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 95,
+        "A": "The sum of 25 and 44 is 69.",
+        "B": "The sum of 25 and 44 is 74.",
+        "target_word_A": "69",
+        "target_word_B": "74"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 96,
+        "A": "The sum of 90 and 15 is 105.",
+        "B": "The sum of 90 and 15 is 106.",
+        "target_word_A": "105",
+        "target_word_B": "106"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 97,
+        "A": "The quotient of 18 and 9 is 2.",
+        "B": "The quotient of 18 and 9 is 3.",
+        "target_word_A": "2",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 98,
+        "A": "The product of 42 and 10 is 420.",
+        "B": "The product of 42 and 10 is 429.",
+        "target_word_A": "420",
+        "target_word_B": "429"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 99,
+        "A": "The difference of 43 and 29 is 14.",
+        "B": "The difference of 43 and 29 is 23.",
+        "target_word_A": "14",
+        "target_word_B": "23"
+    },
+    {
+        "catalog": "math",
+        "type": "Arithmetic",
+        "id": 100,
+        "A": "The sum of 94 and 80 is 174.",
+        "B": "The sum of 94 and 80 is 181.",
+        "target_word_A": "174",
+        "target_word_B": "181"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 1,
         "A": "If x + 10 = 25, then x is 15.",
         "B": "If x + 10 = 25, then x is 14.",
         "target_word_A": "15",
@@ -56,7 +911,7 @@
     {
         "catalog": "math",
         "type": "Equation",
-        "id": 7,
+        "id": 2,
         "A": "Solving y - 5 = 20 gives y = 25.",
         "B": "Solving y - 5 = 20 gives y = 24.",
         "target_word_A": "25",
@@ -65,7 +920,7 @@
     {
         "catalog": "math",
         "type": "Equation",
-        "id": 8,
+        "id": 3,
         "A": "For 4z = 48, z equals 12.",
         "B": "For 4z = 48, z equals 13.",
         "target_word_A": "12",
@@ -74,7 +929,7 @@
     {
         "catalog": "math",
         "type": "Equation",
-        "id": 9,
+        "id": 4,
         "A": "When 100 / a = 20, a is 5.",
         "B": "When 100 / a = 20, a is 4.",
         "target_word_A": "5",
@@ -83,7 +938,7 @@
     {
         "catalog": "math",
         "type": "Equation",
-        "id": 10,
+        "id": 5,
         "A": "If 2b + 3 = 19, then b is 8.",
         "B": "If 2b + 3 = 19, then b is 9.",
         "target_word_A": "8",
@@ -91,8 +946,824 @@
     },
     {
         "catalog": "math",
-        "type": "Word Problem",
+        "type": "Equation",
+        "id": 6,
+        "A": "If 7x - 1 = 6, then x is 1.",
+        "B": "If 7x - 1 = 6, then x is 2.",
+        "target_word_A": "1",
+        "target_word_B": "2"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 7,
+        "A": "If 9x - 5 = 4, then x is 1.",
+        "B": "If 9x - 5 = 4, then x is 3.",
+        "target_word_A": "1",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 8,
+        "A": "If 9x = 36, then x is 4.",
+        "B": "If 9x = 36, then x is 5.",
+        "target_word_A": "4",
+        "target_word_B": "5"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 9,
+        "A": "If 1x - 1 = 8, then x is 9.",
+        "B": "If 1x - 1 = 8, then x is 13.",
+        "target_word_A": "9",
+        "target_word_B": "13"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 10,
+        "A": "If x / 3 = 10, then x is 30.",
+        "B": "If x / 3 = 10, then x is 32.",
+        "target_word_A": "30",
+        "target_word_B": "32"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
         "id": 11,
+        "A": "If 6x - 7 = 5, then x is 2.",
+        "B": "If 6x - 7 = 5, then x is 3.",
+        "target_word_A": "2",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 12,
+        "A": "If 1x + 9 = 19, then x is 10.",
+        "B": "If 1x + 9 = 19, then x is 15.",
+        "target_word_A": "10",
+        "target_word_B": "15"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 13,
+        "A": "If 5x + 9 = 19, then x is 2.",
+        "B": "If 5x + 9 = 19, then x is 5.",
+        "target_word_A": "2",
+        "target_word_B": "5"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 14,
+        "A": "If 10x = 16, then x is 1.",
+        "B": "If 10x = 16, then x is 6.",
+        "target_word_A": "1",
+        "target_word_B": "6"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 15,
+        "A": "If x / 6 = 8, then x is 48.",
+        "B": "If x / 6 = 8, then x is 53.",
+        "target_word_A": "48",
+        "target_word_B": "53"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 16,
+        "A": "If x / 3 = 8, then x is 24.",
+        "B": "If x / 3 = 8, then x is 25.",
+        "target_word_A": "24",
+        "target_word_B": "25"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 17,
+        "A": "If 7x - 6 = 2, then x is 1.",
+        "B": "If 7x - 6 = 2, then x is 3.",
+        "target_word_A": "1",
+        "target_word_B": "3"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 18,
+        "A": "If 9x = 4, then x is 0.",
+        "B": "If 9x = 4, then x is 1.",
+        "target_word_A": "0",
+        "target_word_B": "1"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 19,
+        "A": "If 10x - 1 = 1, then x is 0.",
+        "B": "If 10x - 1 = 1, then x is 2.",
+        "target_word_A": "0",
+        "target_word_B": "2"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 20,
+        "A": "If 1x + 8 = 20, then x is 12.",
+        "B": "If 1x + 8 = 20, then x is 15.",
+        "target_word_A": "12",
+        "target_word_B": "15"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 21,
+        "A": "If 3a + 7 = 31, then a is 8.",
+        "B": "If 3a + 7 = 31, then a is 10.",
+        "target_word_A": "8",
+        "target_word_B": "10"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 22,
+        "A": "If b / 5 = 9, then b is 45.",
+        "B": "If b / 5 = 9, then b is 50.",
+        "target_word_A": "45",
+        "target_word_B": "50"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 23,
+        "A": "If 12c - 20 = 100, then c is 10.",
+        "B": "If 12c - 20 = 100, then c is 12.",
+        "target_word_A": "10",
+        "target_word_B": "12"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 24,
+        "A": "If 8y * 2 = 80, then y is 5.",
+        "B": "If 8y * 2 = 80, then y is 8.",
+        "target_word_A": "5",
+        "target_word_B": "8"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 25,
+        "A": "If z + 100 = 150, then z is 50.",
+        "B": "If z + 100 = 150, then z is 75.",
+        "target_word_A": "50",
+        "target_word_B": "75"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 26,
+        "A": "If 4m - 10 = 30, then m is 10.",
+        "B": "If 4m - 10 = 30, then m is 12.",
+        "target_word_A": "10",
+        "target_word_B": "12"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 27,
+        "A": "If n / 7 = 7, then n is 49.",
+        "B": "If n / 7 = 7, then n is 56.",
+        "target_word_A": "49",
+        "target_word_B": "56"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 28,
+        "A": "If 2p + 15 = 45, then p is 15.",
+        "B": "If 2p + 15 = 45, then p is 20.",
+        "target_word_A": "15",
+        "target_word_B": "20"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 29,
+        "A": "If 9q = 81, then q is 9.",
+        "B": "If 9q = 81, then q is 8.",
+        "target_word_A": "9",
+        "target_word_B": "8"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 30,
+        "A": "If r - 25 = 75, then r is 100.",
+        "B": "If r - 25 = 75, then r is 105.",
+        "target_word_A": "100",
+        "target_word_B": "105"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 31,
+        "A": "If 6s + 11 = 77, then s is 11.",
+        "B": "If 6s + 11 = 77, then s is 12.",
+        "target_word_A": "11",
+        "target_word_B": "12"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 32,
+        "A": "If t / 3 = 12, then t is 36.",
+        "B": "If t / 3 = 12, then t is 39.",
+        "target_word_A": "36",
+        "target_word_B": "39"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 33,
+        "A": "If 5u - 5 = 50, then u is 11.",
+        "B": "If 5u - 5 = 50, then u is 10.",
+        "target_word_A": "11",
+        "target_word_B": "10"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 34,
+        "A": "If 20v = 100, then v is 5.",
+        "B": "If 20v = 100, then v is 6.",
+        "target_word_A": "5",
+        "target_word_B": "6"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 35,
+        "A": "If w + 30 = 90, then w is 60.",
+        "B": "If w + 30 = 90, then w is 65.",
+        "target_word_A": "60",
+        "target_word_B": "65"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 36,
+        "A": "If 7k + 2 = 72, then k is 10.",
+        "B": "If 7k + 2 = 72, then k is 11.",
+        "target_word_A": "10",
+        "target_word_B": "11"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 37,
+        "A": "If j / 10 = 15, then j is 150.",
+        "B": "If j / 10 = 15, then j is 160.",
+        "target_word_A": "150",
+        "target_word_B": "160"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 38,
+        "A": "If 8h - 4 = 76, then h is 10.",
+        "B": "If 8h - 4 = 76, then h is 9.",
+        "target_word_A": "10",
+        "target_word_B": "9"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 39,
+        "A": "If 15g = 60, then g is 4.",
+        "B": "If 15g = 60, then g is 5.",
+        "target_word_A": "4",
+        "target_word_B": "5"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 40,
+        "A": "If f - 50 = 50, then f is 100.",
+        "B": "If f - 50 = 50, then f is 110.",
+        "target_word_A": "100",
+        "target_word_B": "110"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 41,
+        "A": "If 9a + 9 = 90, then a is 9.",
+        "B": "If 9a + 9 = 90, then a is 10.",
+        "target_word_A": "9",
+        "target_word_B": "10"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 42,
+        "A": "If b / 11 = 11, then b is 121.",
+        "B": "If b / 11 = 11, then b is 122.",
+        "target_word_A": "121",
+        "target_word_B": "122"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 43,
+        "A": "If 4c - 3 = 37, then c is 10.",
+        "B": "If 4c - 3 = 37, then c is 11.",
+        "target_word_A": "10",
+        "target_word_B": "11"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 44,
+        "A": "If 25y = 125, then y is 5.",
+        "B": "If 25y = 125, then y is 6.",
+        "target_word_A": "5",
+        "target_word_B": "6"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 45,
+        "A": "If z + 200 = 300, then z is 100.",
+        "B": "If z + 200 = 300, then z is 150.",
+        "target_word_A": "100",
+        "target_word_B": "150"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 46,
+        "A": "If 10m - 50 = 50, then m is 10.",
+        "B": "If 10m - 50 = 50, then m is 11.",
+        "target_word_A": "10",
+        "target_word_B": "11"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 47,
+        "A": "If n / 2 = 33, then n is 66.",
+        "B": "If n / 2 = 33, then n is 68.",
+        "target_word_A": "66",
+        "target_word_B": "68"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 48,
+        "A": "If 3p + 1 = 16, then p is 5.",
+        "B": "If 3p + 1 = 16, then p is 6.",
+        "target_word_A": "5",
+        "target_word_B": "6"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 49,
+        "A": "If 11q = 121, then q is 11.",
+        "B": "If 11q = 121, then q is 12.",
+        "target_word_A": "11",
+        "target_word_B": "12"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 50,
+        "A": "If r - 15 = 60, then r is 75.",
+        "B": "If r - 15 = 60, then r is 80.",
+        "target_word_A": "75",
+        "target_word_B": "80"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 51,
+        "A": "If 8s + 4 = 84, then s is 10.",
+        "B": "If 8s + 4 = 84, then s is 11.",
+        "target_word_A": "10",
+        "target_word_B": "11"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 52,
+        "A": "If t / 6 = 6, then t is 36.",
+        "B": "If t / 6 = 6, then t is 42.",
+        "target_word_A": "36",
+        "target_word_B": "42"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 53,
+        "A": "If 7u - 14 = 21, then u is 5.",
+        "B": "If 7u - 14 = 21, then u is 6.",
+        "target_word_A": "5",
+        "target_word_B": "6"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 54,
+        "A": "If 12v = 144, then v is 12.",
+        "B": "If 12v = 144, then v is 13.",
+        "target_word_A": "12",
+        "target_word_B": "13"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 55,
+        "A": "If w + 77 = 100, then w is 23.",
+        "B": "If w + 77 = 100, then w is 33.",
+        "target_word_A": "23",
+        "target_word_B": "33"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 56,
+        "A": "If 2k + 50 = 70, then k is 10.",
+        "B": "If 2k + 50 = 70, then k is 15.",
+        "target_word_A": "10",
+        "target_word_B": "15"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 57,
+        "A": "If j / 8 = 8, then j is 64.",
+        "B": "If j / 8 = 8, then j is 72.",
+        "target_word_A": "64",
+        "target_word_B": "72"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 58,
+        "A": "If 9h - 9 = 81, then h is 10.",
+        "B": "If 9h - 9 = 81, then h is 11.",
+        "target_word_A": "10",
+        "target_word_B": "11"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 59,
+        "A": "If 13g = 39, then g is 3.",
+        "B": "If 13g = 39, then g is 4.",
+        "target_word_A": "3",
+        "target_word_B": "4"
+    },
+    {
+        "catalog": "math",
+        "type": "Equation",
+        "id": 60,
+        "A": "If f - 100 = 200, then f is 300.",
+        "B": "If f - 100 = 200, then f is 310.",
+        "target_word_A": "300",
+        "target_word_B": "310"
+    },
+    {
+        "id": 61,
+        "type": "Equation",
+        "sentence_A": "If 12 * y - 100 = 8, what is the value of y?",
+        "sentence_B": "If 12 * y - 100 = 20, what is the value of y?",
+        "target_word_A": "9",
+        "target_word_B": "10"
+    },
+    {
+        "id": 62,
+        "type": "Equation",
+        "sentence_A": "If 15 * z + 50 = 200, what is the value of z?",
+        "sentence_B": "If 15 * z + 50 = 215, what is the value of z?",
+        "target_word_A": "10",
+        "target_word_B": "11"
+    },
+    {
+        "id": 63,
+        "type": "Equation",
+        "sentence_A": "If a / 5 + 10 = 15, what is the value of a?",
+        "sentence_B": "If a / 5 + 10 = 16, what is the value of a?",
+        "target_word_A": "25",
+        "target_word_B": "30"
+    },
+    {
+        "id": 64,
+        "type": "Equation",
+        "sentence_A": "If b / 7 - 3 = 7, what is the value of b?",
+        "sentence_B": "If b / 7 - 3 = 8, what is the value of b?",
+        "target_word_A": "70",
+        "target_word_B": "77"
+    },
+    {
+        "id": 65,
+        "type": "Equation",
+        "sentence_A": "If 200 - 5 * c = 100, what is the value of c?",
+        "sentence_B": "If 200 - 5 * c = 95, what is the value of c?",
+        "target_word_A": "20",
+        "target_word_B": "21"
+    },
+    {
+        "id": 66,
+        "type": "Equation",
+        "sentence_A": "If 300 / d + 5 = 15, what is the value of d?",
+        "sentence_B": "If 300 / d + 5 = 20, what is the value of d?",
+        "target_word_A": "30",
+        "target_word_B": "20"
+    },
+    {
+        "id": 67,
+        "type": "Equation",
+        "sentence_A": "If 8 * e - 15 = 25, what is the value of e?",
+        "sentence_B": "If 8 * e - 15 = 33, what is the value of e?",
+        "target_word_A": "5",
+        "target_word_B": "6"
+    },
+    {
+        "id": 68,
+        "type": "Equation",
+        "sentence_A": "If 9 * f + 25 = 70, what is the value of f?",
+        "sentence_B": "If 9 * f + 25 = 79, what is the value of f?",
+        "target_word_A": "5",
+        "target_word_B": "6"
+    },
+    {
+        "id": 69,
+        "type": "Equation",
+        "sentence_A": "If g / 10 + 8 = 18, what is the value of g?",
+        "sentence_B": "If g / 10 + 8 = 20, what is the value of g?",
+        "target_word_A": "100",
+        "target_word_B": "120"
+    },
+    {
+        "id": 70,
+        "type": "Equation",
+        "sentence_A": "If h / 12 - 2 = 8, what is the value of h?",
+        "sentence_B": "If h / 12 - 2 = 9, what is the value of h?",
+        "target_word_A": "120",
+        "target_word_B": "132"
+    },
+    {
+        "id": 71,
+        "type": "Equation",
+        "sentence_A": "If 500 - 10 * i = 300, what is the value of i?",
+        "sentence_B": "If 500 - 10 * i = 290, what is the value of i?",
+        "target_word_A": "20",
+        "target_word_B": "21"
+    },
+    {
+        "id": 72,
+        "type": "Equation",
+        "sentence_A": "If 600 / j + 10 = 40, what is the value of j?",
+        "sentence_B": "If 600 / j + 10 = 30, what is the value of j?",
+        "target_word_A": "20",
+        "target_word_B": "30"
+    },
+    {
+        "id": 73,
+        "type": "Equation",
+        "sentence_A": "If 11 * k - 22 = 88, what is the value of k?",
+        "sentence_B": "If 11 * k - 22 = 99, what is the value of k?",
+        "target_word_A": "10",
+        "target_word_B": "11"
+    },
+    {
+        "id": 74,
+        "type": "Equation",
+        "sentence_A": "If 13 * m + 26 = 65, what is the value of m?",
+        "sentence_B": "If 13 * m + 26 = 78, what is the value of m?",
+        "target_word_A": "3",
+        "target_word_B": "4"
+    },
+    {
+        "id": 75,
+        "type": "Equation",
+        "sentence_A": "If n / 9 + 7 = 16, what is the value of n?",
+        "sentence_B": "If n / 9 + 7 = 17, what is the value of n?",
+        "target_word_A": "81",
+        "target_word_B": "90"
+    },
+    {
+        "id": 76,
+        "type": "Equation",
+        "sentence_A": "If p / 8 - 6 = 4, what is the value of p?",
+        "sentence_B": "If p / 8 - 6 = 5, what is the value of p?",
+        "target_word_A": "80",
+        "target_word_B": "88"
+    },
+    {
+        "id": 77,
+        "type": "Equation",
+        "sentence_A": "If 400 - 8 * q = 240, what is the value of q?",
+        "sentence_B": "If 400 - 8 * q = 232, what is the value of q?",
+        "target_word_A": "20",
+        "target_word_B": "21"
+    },
+    {
+        "id": 78,
+        "type": "Equation",
+        "sentence_A": "If 720 / r + 5 = 14, what is the value of r?",
+        "sentence_B": "If 720 / r + 5 = 17, what is the value of r?",
+        "target_word_A": "80",
+        "target_word_B": "60"
+    },
+    {
+        "id": 79,
+        "type": "Equation",
+        "sentence_A": "If 14 * s - 28 = 70, what is the value of s?",
+        "sentence_B": "If 14 * s - 28 = 84, what is the value of s?",
+        "target_word_A": "7",
+        "target_word_B": "8"
+    },
+    {
+        "id": 80,
+        "type": "Equation",
+        "sentence_A": "If 16 * t + 32 = 96, what is the value of t?",
+        "sentence_B": "If 16 * t + 32 = 112, what is the value of t?",
+        "target_word_A": "4",
+        "target_word_B": "5"
+    },
+    {
+        "id": 81,
+        "type": "Equation",
+        "sentence_A": "If u / 11 + 9 = 19, what is the value of u?",
+        "sentence_B": "If u / 11 + 9 = 20, what is the value of u?",
+        "target_word_A": "110",
+        "target_word_B": "121"
+    },
+    {
+        "id": 82,
+        "type": "Equation",
+        "sentence_A": "If v / 13 - 4 = 6, what is the value of v?",
+        "sentence_B": "If v / 13 - 4 = 7, what is the value of v?",
+        "target_word_A": "130",
+        "target_word_B": "143"
+    },
+    {
+        "id": 83,
+        "type": "Equation",
+        "sentence_A": "If 800 - 20 * w = 400, what is the value of w?",
+        "sentence_B": "If 800 - 20 * w = 380, what is the value of w?",
+        "target_word_A": "20",
+        "target_word_B": "21"
+    },
+    {
+        "id": 84,
+        "type": "Equation",
+        "sentence_A": "If 900 / y + 15 = 45, what is the value of y?",
+        "sentence_B": "If 900 / y + 15 = 30, what is the value of y?",
+        "target_word_A": "30",
+        "target_word_B": "60"
+    },
+    {
+        "id": 85,
+        "type": "Equation",
+        "sentence_A": "If 18 * z - 36 = 72, what is the value of z?",
+        "sentence_B": "If 18 * z - 36 = 90, what is the value of z?",
+        "target_word_A": "6",
+        "target_word_B": "7"
+    },
+    {
+        "id": 86,
+        "type": "Equation",
+        "sentence_A": "If 20 * a + 40 = 140, what is the value of a?",
+        "sentence_B": "If 20 * a + 40 = 160, what is the value of a?",
+        "target_word_A": "5",
+        "target_word_B": "6"
+    },
+    {
+        "id": 87,
+        "type": "Equation",
+        "sentence_A": "If b / 15 + 10 = 20, what is the value of b?",
+        "sentence_B": "If b / 15 + 10 = 21, what is the value of b?",
+        "target_word_A": "150",
+        "target_word_B": "165"
+    },
+    {
+        "id": 88,
+        "type": "Equation",
+        "sentence_A": "If c / 14 - 5 = 5, what is the value of c?",
+        "sentence_B": "If c / 14 - 5 = 6, what is the value of c?",
+        "target_word_A": "140",
+        "target_word_B": "154"
+    },
+    {
+        "id": 89,
+        "type": "Equation",
+        "sentence_A": "If 700 - 14 * d = 420, what is the value of d?",
+        "sentence_B": "If 700 - 14 * d = 406, what is the value of d?",
+        "target_word_A": "20",
+        "target_word_B": "21"
+    },
+    {
+        "id": 90,
+        "type": "Equation",
+        "sentence_A": "If 840 / e + 12 = 32, what is the value of e?",
+        "sentence_B": "If 840 / e + 12 = 24, what is the value of e?",
+        "target_word_A": "42",
+        "target_word_B": "70"
+    },
+    {
+        "id": 91,
+        "type": "Equation",
+        "sentence_A": "If 22 * f - 44 = 110, what is the value of f?",
+        "sentence_B": "If 22 * f - 44 = 132, what is the value of f?",
+        "target_word_A": "7",
+        "target_word_B": "8"
+    },
+    {
+        "id": 92,
+        "type": "Equation",
+        "sentence_A": "If 25 * g + 50 = 200, what is the value of g?",
+        "sentence_B": "If 25 * g + 50 = 225, what is the value of g?",
+        "target_word_A": "6",
+        "target_word_B": "7"
+    },
+    {
+        "id": 93,
+        "type": "Equation",
+        "sentence_A": "If h / 20 + 15 = 35, what is the value of h?",
+        "sentence_B": "If h / 20 + 15 = 36, what is the value of h?",
+        "target_word_A": "400",
+        "target_word_B": "420"
+    },
+    {
+        "id": 94,
+        "type": "Equation",
+        "sentence_A": "If i / 18 - 9 = 1, what is the value of i?",
+        "sentence_B": "If i / 18 - 9 = 2, what is the value of i?",
+        "target_word_A": "180",
+        "target_word_B": "198"
+    },
+    {
+        "id": 95,
+        "type": "Equation",
+        "sentence_A": "If 999 - 9 * j = 900, what is the value of j?",
+        "sentence_B": "If 999 - 9 * j = 891, what is the value of j?",
+        "target_word_A": "11",
+        "target_word_B": "12"
+    },
+    {
+        "id": 96,
+        "type": "Equation",
+        "sentence_A": "If 960 / k + 8 = 28, what is the value of k?",
+        "sentence_B": "If 960 / k + 8 = 24, what is the value of k?",
+        "target_word_A": "48",
+        "target_word_B": "60"
+    },
+    {
+        "id": 97,
+        "type": "Equation",
+        "sentence_A": "If 30 * m - 60 = 240, what is the value of m?",
+        "sentence_B": "If 30 * m - 60 = 270, what is the value of m?",
+        "target_word_A": "10",
+        "target_word_B": "11"
+    },
+    {
+        "id": 98,
+        "type": "Equation",
+        "sentence_A": "If 40 * n + 80 = 480, what is the value of n?",
+        "sentence_B": "If 40 * n + 80 = 520, what is the value of n?",
+        "target_word_A": "10",
+        "target_word_B": "11"
+    },
+    {
+        "id": 99,
+        "type": "Equation",
+        "sentence_A": "If p / 25 + 20 = 40, what is the value of p?",
+        "sentence_B": "If p / 25 + 20 = 41, what is the value of p?",
+        "target_word_A": "500",
+        "target_word_B": "525"
+    },
+    {
+        "id": 100,
+        "type": "Equation",
+        "sentence_A": "If q / 30 - 10 = 20, what is the value of q?",
+        "sentence_B": "If q / 30 - 10 = 21, what is the value of q?",
+        "target_word_A": "900",
+        "target_word_B": "930"
+    },
+
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 1,
         "A": "If you buy 5 apples costing $2 each, the total cost is $10.",
         "B": "If you buy 5 apples costing $2 each, the total cost is $12.",
         "target_word_A": "10",
@@ -101,7 +1772,7 @@
     {
         "catalog": "math",
         "type": "Word Problem",
-        "id": 12,
+        "id": 2,
         "A": "A car travels at 60 km/h for 3 hours, so it covers 180 km.",
         "B": "A car travels at 60 km/h for 3 hours, so it covers 170 km.",
         "target_word_A": "180",
@@ -110,7 +1781,7 @@
     {
         "catalog": "math",
         "type": "Word Problem",
-        "id": 13,
+        "id": 3,
         "A": "A rectangle with length 15 cm and width 10 cm has an area of 150 square cm.",
         "B": "A rectangle with length 15 cm and width 10 cm has an area of 160 square cm.",
         "target_word_A": "150",
@@ -119,7 +1790,7 @@
     {
         "catalog": "math",
         "type": "Word Problem",
-        "id": 14,
+        "id": 4,
         "A": "A town has 500 people and grows by 50 each year, so after one year it has 550 people.",
         "B": "A town has 500 people and grows by 50 each year, so after one year it has 540 people.",
         "target_word_A": "550",
@@ -128,10 +1799,865 @@
     {
         "catalog": "math",
         "type": "Word Problem",
-        "id": 15,
+        "id": 5,
         "A": "A $200 item with a 20% discount costs $160.",
         "B": "A $200 item with a 20% discount costs $150.",
         "target_word_A": "160",
         "target_word_B": "150"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 6,
+        "A": "If you have 18 boxes with 8 apples each, you have a total of 144 apples.",
+        "B": "If you have 18 boxes with 8 apples each, you have a total of 153 apples.",
+        "target_word_A": "144",
+        "target_word_B": "153"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 7,
+        "A": "If you have 3 boxes with 6 apples each, you have a total of 18 apples.",
+        "B": "If you have 3 boxes with 6 apples each, you have a total of 24 apples.",
+        "target_word_A": "18",
+        "target_word_B": "24"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 8,
+        "A": "If you have 3 boxes with 6 apples each, you have a total of 18 apples.",
+        "B": "If you have 3 boxes with 6 apples each, you have a total of 28 apples.",
+        "target_word_A": "18",
+        "target_word_B": "28"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 9,
+        "A": "If you have 2 boxes with 10 apples each, you have a total of 20 apples.",
+        "B": "If you have 2 boxes with 10 apples each, you have a total of 25 apples.",
+        "target_word_A": "20",
+        "target_word_B": "25"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 10,
+        "A": "If you have 13 boxes with 16 apples each, you have a total of 208 apples.",
+        "B": "If you have 13 boxes with 16 apples each, you have a total of 217 apples.",
+        "target_word_A": "208",
+        "target_word_B": "217"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 11,
+        "A": "If you have 2 boxes with 6 apples each, you have a total of 12 apples.",
+        "B": "If you have 2 boxes with 6 apples each, you have a total of 21 apples.",
+        "target_word_A": "12",
+        "target_word_B": "21"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 12,
+        "A": "If you have 16 boxes with 1 apples each, you have a total of 16 apples.",
+        "B": "If you have 16 boxes with 1 apples each, you have a total of 19 apples.",
+        "target_word_A": "16",
+        "target_word_B": "19"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 13,
+        "A": "If you have 7 boxes with 2 apples each, you have a total of 14 apples.",
+        "B": "If you have 7 boxes with 2 apples each, you have a total of 19 apples.",
+        "target_word_A": "14",
+        "target_word_B": "19"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 14,
+        "A": "If you have 15 boxes with 13 apples each, you have a total of 195 apples.",
+        "B": "If you have 15 boxes with 13 apples each, you have a total of 198 apples.",
+        "target_word_A": "195",
+        "target_word_B": "198"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 15,
+        "A": "If you have 18 boxes with 19 apples each, you have a total of 342 apples.",
+        "B": "If you have 18 boxes with 19 apples each, you have a total of 346 apples.",
+        "target_word_A": "342",
+        "target_word_B": "346"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 16,
+        "A": "If you have 8 boxes with 3 apples each, you have a total of 24 apples.",
+        "B": "If you have 8 boxes with 3 apples each, you have a total of 31 apples.",
+        "target_word_A": "24",
+        "target_word_B": "31"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 17,
+        "A": "If you have 16 boxes with 11 apples each, you have a total of 176 apples.",
+        "B": "If you have 16 boxes with 11 apples each, you have a total of 178 apples.",
+        "target_word_A": "176",
+        "target_word_B": "178"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 18,
+        "A": "If you have 1 boxes with 17 apples each, you have a total of 17 apples.",
+        "B": "If you have 1 boxes with 17 apples each, you have a total of 26 apples.",
+        "target_word_A": "17",
+        "target_word_B": "26"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 19,
+        "A": "If you have 10 boxes with 8 apples each, you have a total of 80 apples.",
+        "B": "If you have 10 boxes with 8 apples each, you have a total of 88 apples.",
+        "target_word_A": "80",
+        "target_word_B": "88"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 20,
+        "A": "If you have 15 boxes with 17 apples each, you have a total of 255 apples.",
+        "B": "If you have 15 boxes with 17 apples each, you have a total of 265 apples.",
+        "target_word_A": "255",
+        "target_word_B": "265"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 21,
+        "A": "If you have 11 boxes with 5 apples each, you have a total of 55 apples.",
+        "B": "If you have 11 boxes with 5 apples each, you have a total of 65 apples.",
+        "target_word_A": "55",
+        "target_word_B": "65"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 22,
+        "A": "If you have 2 boxes with 6 apples each, you have a total of 12 apples.",
+        "B": "If you have 2 boxes with 6 apples each, you have a total of 13 apples.",
+        "target_word_A": "12",
+        "target_word_B": "13"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 23,
+        "A": "If you have 9 boxes with 14 apples each, you have a total of 126 apples.",
+        "B": "If you have 9 boxes with 14 apples each, you have a total of 130 apples.",
+        "target_word_A": "126",
+        "target_word_B": "130"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 24,
+        "A": "If you have 1 boxes with 3 apples each, you have a total of 3 apples.",
+        "B": "If you have 1 boxes with 3 apples each, you have a total of 11 apples.",
+        "target_word_A": "3",
+        "target_word_B": "11"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 25,
+        "A": "If you have 2 boxes with 18 apples each, you have a total of 36 apples.",
+        "B": "If you have 2 boxes with 18 apples each, you have a total of 43 apples.",
+        "target_word_A": "36",
+        "target_word_B": "43"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 26,
+        "A": "If you have 14 boxes with 12 apples each, you have a total of 168 apples.",
+        "B": "If you have 14 boxes with 12 apples each, you have a total of 178 apples.",
+        "target_word_A": "168",
+        "target_word_B": "178"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 27,
+        "A": "If you have 14 boxes with 15 apples each, you have a total of 210 apples.",
+        "B": "If you have 14 boxes with 15 apples each, you have a total of 211 apples.",
+        "target_word_A": "210",
+        "target_word_B": "211"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 28,
+        "A": "If you have 14 boxes with 7 apples each, you have a total of 98 apples.",
+        "B": "If you have 14 boxes with 7 apples each, you have a total of 103 apples.",
+        "target_word_A": "98",
+        "target_word_B": "103"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 29,
+        "A": "If you have 11 boxes with 8 apples each, you have a total of 88 apples.",
+        "B": "If you have 11 boxes with 8 apples each, you have a total of 90 apples.",
+        "target_word_A": "88",
+        "target_word_B": "90"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 30,
+        "A": "If you have 19 boxes with 19 apples each, you have a total of 361 apples.",
+        "B": "If you have 19 boxes with 19 apples each, you have a total of 362 apples.",
+        "target_word_A": "361",
+        "target_word_B": "362"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 31,
+        "A": "If you have 9 boxes with 17 apples each, you have a total of 153 apples.",
+        "B": "If you have 9 boxes with 17 apples each, you have a total of 163 apples.",
+        "target_word_A": "153",
+        "target_word_B": "163"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 32,
+        "A": "If you have 17 boxes with 14 apples each, you have a total of 238 apples.",
+        "B": "If you have 17 boxes with 14 apples each, you have a total of 244 apples.",
+        "target_word_A": "238",
+        "target_word_B": "244"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 33,
+        "A": "If you have 10 boxes with 9 apples each, you have a total of 90 apples.",
+        "B": "If you have 10 boxes with 9 apples each, you have a total of 98 apples.",
+        "target_word_A": "90",
+        "target_word_B": "98"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 34,
+        "A": "If you have 5 boxes with 16 apples each, you have a total of 80 apples.",
+        "B": "If you have 5 boxes with 16 apples each, you have a total of 84 apples.",
+        "target_word_A": "80",
+        "target_word_B": "84"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 35,
+        "A": "If you have 9 boxes with 14 apples each, you have a total of 126 apples.",
+        "B": "If you have 9 boxes with 14 apples each, you have a total of 130 apples.",
+        "target_word_A": "126",
+        "target_word_B": "130"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 36,
+        "A": "If you have 3 boxes with 6 apples each, you have a total of 18 apples.",
+        "B": "If you have 3 boxes with 6 apples each, you have a total of 19 apples.",
+        "target_word_A": "18",
+        "target_word_B": "19"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 37,
+        "A": "If you have 7 boxes with 2 apples each, you have a total of 14 apples.",
+        "B": "If you have 7 boxes with 2 apples each, you have a total of 16 apples.",
+        "target_word_A": "14",
+        "target_word_B": "16"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 38,
+        "A": "If you have 6 boxes with 6 apples each, you have a total of 36 apples.",
+        "B": "If you have 6 boxes with 6 apples each, you have a total of 38 apples.",
+        "target_word_A": "36",
+        "target_word_B": "38"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 39,
+        "A": "If you have 16 boxes with 6 apples each, you have a total of 96 apples.",
+        "B": "If you have 16 boxes with 6 apples each, you have a total of 105 apples.",
+        "target_word_A": "96",
+        "target_word_B": "105"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 40,
+        "A": "If you have 14 boxes with 11 apples each, you have a total of 154 apples.",
+        "B": "If you have 14 boxes with 11 apples each, you have a total of 156 apples.",
+        "target_word_A": "154",
+        "target_word_B": "156"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 41,
+        "A": "If you have 5 boxes with 11 apples each, you have a total of 55 apples.",
+        "B": "If you have 5 boxes with 11 apples each, you have a total of 65 apples.",
+        "target_word_A": "55",
+        "target_word_B": "65"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 42,
+        "A": "If you have 16 boxes with 5 apples each, you have a total of 80 apples.",
+        "B": "If you have 16 boxes with 5 apples each, you have a total of 90 apples.",
+        "target_word_A": "80",
+        "target_word_B": "90"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 43,
+        "A": "If you have 7 boxes with 1 apples each, you have a total of 7 apples.",
+        "B": "If you have 7 boxes with 1 apples each, you have a total of 8 apples.",
+        "target_word_A": "7",
+        "target_word_B": "8"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 44,
+        "A": "If you have 2 boxes with 13 apples each, you have a total of 26 apples.",
+        "B": "If you have 2 boxes with 13 apples each, you have a total of 36 apples.",
+        "target_word_A": "26",
+        "target_word_B": "36"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 45,
+        "A": "If you have 10 boxes with 7 apples each, you have a total of 70 apples.",
+        "B": "If you have 10 boxes with 7 apples each, you have a total of 78 apples.",
+        "target_word_A": "70",
+        "target_word_B": "78"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 46,
+        "A": "If you have 12 boxes with 20 apples each, you have a total of 240 apples.",
+        "B": "If you have 12 boxes with 20 apples each, you have a total of 249 apples.",
+        "target_word_A": "240",
+        "target_word_B": "249"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 47,
+        "A": "If you have 3 boxes with 14 apples each, you have a total of 42 apples.",
+        "B": "If you have 3 boxes with 14 apples each, you have a total of 43 apples.",
+        "target_word_A": "42",
+        "target_word_B": "43"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 48,
+        "A": "If you have 12 boxes with 18 apples each, you have a total of 216 apples.",
+        "B": "If you have 12 boxes with 18 apples each, you have a total of 221 apples.",
+        "target_word_A": "216",
+        "target_word_B": "221"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 49,
+        "A": "If you have 3 boxes with 7 apples each, you have a total of 21 apples.",
+        "B": "If you have 3 boxes with 7 apples each, you have a total of 28 apples.",
+        "target_word_A": "21",
+        "target_word_B": "28"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 50,
+        "A": "If you have 5 boxes with 20 apples each, you have a total of 100 apples.",
+        "B": "If you have 5 boxes with 20 apples each, you have a total of 102 apples.",
+        "target_word_A": "100",
+        "target_word_B": "102"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 51,
+        "A": "If you have 2 boxes with 9 apples each, you have a total of 18 apples.",
+        "B": "If you have 2 boxes with 9 apples each, you have a total of 19 apples.",
+        "target_word_A": "18",
+        "target_word_B": "19"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 52,
+        "A": "If you have 6 boxes with 1 apples each, you have a total of 6 apples.",
+        "B": "If you have 6 boxes with 1 apples each, you have a total of 10 apples.",
+        "target_word_A": "6",
+        "target_word_B": "10"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 53,
+        "A": "If you have 6 boxes with 1 apples each, you have a total of 6 apples.",
+        "B": "If you have 6 boxes with 1 apples each, you have a total of 12 apples.",
+        "target_word_A": "6",
+        "target_word_B": "12"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 54,
+        "A": "If you have 13 boxes with 20 apples each, you have a total of 260 apples.",
+        "B": "If you have 13 boxes with 20 apples each, you have a total of 264 apples.",
+        "target_word_A": "260",
+        "target_word_B": "264"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 55,
+        "A": "If you have 7 boxes with 8 apples each, you have a total of 56 apples.",
+        "B": "If you have 7 boxes with 8 apples each, you have a total of 57 apples.",
+        "target_word_A": "56",
+        "target_word_B": "57"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 56,
+        "A": "If you have 2 boxes with 11 apples each, you have a total of 22 apples.",
+        "B": "If you have 2 boxes with 11 apples each, you have a total of 23 apples.",
+        "target_word_A": "22",
+        "target_word_B": "23"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 57,
+        "A": "If you have 5 boxes with 4 apples each, you have a total of 20 apples.",
+        "B": "If you have 5 boxes with 4 apples each, you have a total of 28 apples.",
+        "target_word_A": "20",
+        "target_word_B": "28"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 58,
+        "A": "If you have 10 boxes with 19 apples each, you have a total of 190 apples.",
+        "B": "If you have 10 boxes with 19 apples each, you have a total of 197 apples.",
+        "target_word_A": "190",
+        "target_word_B": "197"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 59,
+        "A": "If you have 6 boxes with 20 apples each, you have a total of 120 apples.",
+        "B": "If you have 6 boxes with 20 apples each, you have a total of 127 apples.",
+        "target_word_A": "120",
+        "target_word_B": "127"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 60,
+        "A": "If you have 18 boxes with 18 apples each, you have a total of 324 apples.",
+        "B": "If you have 18 boxes with 18 apples each, you have a total of 331 apples.",
+        "target_word_A": "324",
+        "target_word_B": "331"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 61,
+        "A": "If you have 5 boxes with 12 apples each, you have a total of 60 apples.",
+        "B": "If you have 5 boxes with 12 apples each, you have a total of 66 apples.",
+        "target_word_A": "60",
+        "target_word_B": "66"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 62,
+        "A": "If you have 13 boxes with 5 apples each, you have a total of 65 apples.",
+        "B": "If you have 13 boxes with 5 apples each, you have a total of 70 apples.",
+        "target_word_A": "65",
+        "target_word_B": "70"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 63,
+        "A": "If you have 20 boxes with 16 apples each, you have a total of 320 apples.",
+        "B": "If you have 20 boxes with 16 apples each, you have a total of 325 apples.",
+        "target_word_A": "320",
+        "target_word_B": "325"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 64,
+        "A": "If you have 17 boxes with 10 apples each, you have a total of 170 apples.",
+        "B": "If you have 17 boxes with 10 apples each, you have a total of 173 apples.",
+        "target_word_A": "170",
+        "target_word_B": "173"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 65,
+        "A": "If you have 8 boxes with 17 apples each, you have a total of 136 apples.",
+        "B": "If you have 8 boxes with 17 apples each, you have a total of 139 apples.",
+        "target_word_A": "136",
+        "target_word_B": "139"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 66,
+        "A": "If you have 10 boxes with 1 apples each, you have a total of 10 apples.",
+        "B": "If you have 10 boxes with 1 apples each, you have a total of 16 apples.",
+        "target_word_A": "10",
+        "target_word_B": "16"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 67,
+        "A": "If you have 20 boxes with 5 apples each, you have a total of 100 apples.",
+        "B": "If you have 20 boxes with 5 apples each, you have a total of 107 apples.",
+        "target_word_A": "100",
+        "target_word_B": "107"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 68,
+        "A": "If you have 20 boxes with 4 apples each, you have a total of 80 apples.",
+        "B": "If you have 20 boxes with 4 apples each, you have a total of 87 apples.",
+        "target_word_A": "80",
+        "target_word_B": "87"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 69,
+        "A": "If you have 4 boxes with 4 apples each, you have a total of 16 apples.",
+        "B": "If you have 4 boxes with 4 apples each, you have a total of 21 apples.",
+        "target_word_A": "16",
+        "target_word_B": "21"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 70,
+        "A": "If you have 15 boxes with 14 apples each, you have a total of 210 apples.",
+        "B": "If you have 15 boxes with 14 apples each, you have a total of 214 apples.",
+        "target_word_A": "210",
+        "target_word_B": "214"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 71,
+        "A": "If you have 13 boxes with 15 apples each, you have a total of 195 apples.",
+        "B": "If you have 13 boxes with 15 apples each, you have a total of 205 apples.",
+        "target_word_A": "195",
+        "target_word_B": "205"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 72,
+        "A": "If you have 18 boxes with 14 apples each, you have a total of 252 apples.",
+        "B": "If you have 18 boxes with 14 apples each, you have a total of 254 apples.",
+        "target_word_A": "252",
+        "target_word_B": "254"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 73,
+        "A": "If you have 4 boxes with 6 apples each, you have a total of 24 apples.",
+        "B": "If you have 4 boxes with 6 apples each, you have a total of 30 apples.",
+        "target_word_A": "24",
+        "target_word_B": "30"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 74,
+        "A": "If you have 7 boxes with 20 apples each, you have a total of 140 apples.",
+        "B": "If you have 7 boxes with 20 apples each, you have a total of 142 apples.",
+        "target_word_A": "140",
+        "target_word_B": "142"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 75,
+        "A": "If you have 8 boxes with 8 apples each, you have a total of 64 apples.",
+        "B": "If you have 8 boxes with 8 apples each, you have a total of 67 apples.",
+        "target_word_A": "64",
+        "target_word_B": "67"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 76,
+        "A": "If you have 14 boxes with 9 apples each, you have a total of 126 apples.",
+        "B": "If you have 14 boxes with 9 apples each, you have a total of 128 apples.",
+        "target_word_A": "126",
+        "target_word_B": "128"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 77,
+        "A": "If you have 9 boxes with 8 apples each, you have a total of 72 apples.",
+        "B": "If you have 9 boxes with 8 apples each, you have a total of 76 apples.",
+        "target_word_A": "72",
+        "target_word_B": "76"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 78,
+        "A": "If you have 7 boxes with 1 apples each, you have a total of 7 apples.",
+        "B": "If you have 7 boxes with 1 apples each, you have a total of 14 apples.",
+        "target_word_A": "7",
+        "target_word_B": "14"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 79,
+        "A": "If you have 7 boxes with 12 apples each, you have a total of 84 apples.",
+        "B": "If you have 7 boxes with 12 apples each, you have a total of 85 apples.",
+        "target_word_A": "84",
+        "target_word_B": "85"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 80,
+        "A": "If you have 17 boxes with 20 apples each, you have a total of 340 apples.",
+        "B": "If you have 17 boxes with 20 apples each, you have a total of 346 apples.",
+        "target_word_A": "340",
+        "target_word_B": "346"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 81,
+        "A": "If you have 18 boxes with 16 apples each, you have a total of 288 apples.",
+        "B": "If you have 18 boxes with 16 apples each, you have a total of 298 apples.",
+        "target_word_A": "288",
+        "target_word_B": "298"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 82,
+        "A": "If you have 14 boxes with 19 apples each, you have a total of 266 apples.",
+        "B": "If you have 14 boxes with 19 apples each, you have a total of 271 apples.",
+        "target_word_A": "266",
+        "target_word_B": "271"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 83,
+        "A": "If you have 2 boxes with 7 apples each, you have a total of 14 apples.",
+        "B": "If you have 2 boxes with 7 apples each, you have a total of 21 apples.",
+        "target_word_A": "14",
+        "target_word_B": "21"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 84,
+        "A": "If you have 16 boxes with 16 apples each, you have a total of 256 apples.",
+        "B": "If you have 16 boxes with 16 apples each, you have a total of 258 apples.",
+        "target_word_A": "256",
+        "target_word_B": "258"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 85,
+        "A": "If you have 20 boxes with 6 apples each, you have a total of 120 apples.",
+        "B": "If you have 20 boxes with 6 apples each, you have a total of 127 apples.",
+        "target_word_A": "120",
+        "target_word_B": "127"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 86,
+        "A": "If you have 10 boxes with 15 apples each, you have a total of 150 apples.",
+        "B": "If you have 10 boxes with 15 apples each, you have a total of 153 apples.",
+        "target_word_A": "150",
+        "target_word_B": "153"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 87,
+        "A": "If you have 12 boxes with 11 apples each, you have a total of 132 apples.",
+        "B": "If you have 12 boxes with 11 apples each, you have a total of 136 apples.",
+        "target_word_A": "132",
+        "target_word_B": "136"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 88,
+        "A": "If you have 6 boxes with 9 apples each, you have a total of 54 apples.",
+        "B": "If you have 6 boxes with 9 apples each, you have a total of 56 apples.",
+        "target_word_A": "54",
+        "target_word_B": "56"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 89,
+        "A": "If you have 8 boxes with 2 apples each, you have a total of 16 apples.",
+        "B": "If you have 8 boxes with 2 apples each, you have a total of 20 apples.",
+        "target_word_A": "16",
+        "target_word_B": "20"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 90,
+        "A": "If you have 14 boxes with 3 apples each, you have a total of 42 apples.",
+        "B": "If you have 14 boxes with 3 apples each, you have a total of 45 apples.",
+        "target_word_A": "42",
+        "target_word_B": "45"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 91,
+        "A": "If you have 13 boxes with 8 apples each, you have a total of 104 apples.",
+        "B": "If you have 13 boxes with 8 apples each, you have a total of 106 apples.",
+        "target_word_A": "104",
+        "target_word_B": "106"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 92,
+        "A": "If you have 6 boxes with 2 apples each, you have a total of 12 apples.",
+        "B": "If you have 6 boxes with 2 apples each, you have a total of 13 apples.",
+        "target_word_A": "12",
+        "target_word_B": "13"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 93,
+        "A": "If you have 4 boxes with 1 apples each, you have a total of 4 apples.",
+        "B": "If you have 4 boxes with 1 apples each, you have a total of 14 apples.",
+        "target_word_A": "4",
+        "target_word_B": "14"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 94,
+        "A": "If you have 11 boxes with 7 apples each, you have a total of 77 apples.",
+        "B": "If you have 11 boxes with 7 apples each, you have a total of 85 apples.",
+        "target_word_A": "77",
+        "target_word_B": "85"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 95,
+        "A": "If you have 16 boxes with 3 apples each, you have a total of 48 apples.",
+        "B": "If you have 16 boxes with 3 apples each, you have a total of 57 apples.",
+        "target_word_A": "48",
+        "target_word_B": "57"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 96,
+        "A": "If you have 6 boxes with 13 apples each, you have a total of 78 apples.",
+        "B": "If you have 6 boxes with 13 apples each, you have a total of 80 apples.",
+        "target_word_A": "78",
+        "target_word_B": "80"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 97,
+        "A": "If you have 9 boxes with 20 apples each, you have a total of 180 apples.",
+        "B": "If you have 9 boxes with 20 apples each, you have a total of 188 apples.",
+        "target_word_A": "180",
+        "target_word_B": "188"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 98,
+        "A": "If you have 6 boxes with 9 apples each, you have a total of 54 apples.",
+        "B": "If you have 6 boxes with 9 apples each, you have a total of 61 apples.",
+        "target_word_A": "54",
+        "target_word_B": "61"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 99,
+        "A": "If you have 5 boxes with 20 apples each, you have a total of 100 apples.",
+        "B": "If you have 5 boxes with 20 apples each, you have a total of 106 apples.",
+        "target_word_A": "100",
+        "target_word_B": "106"
+    },
+    {
+        "catalog": "math",
+        "type": "Word Problem",
+        "id": 100,
+        "A": "If you have 3 boxes with 14 apples each, you have a total of 42 apples.",
+        "B": "If you have 3 boxes with 14 apples each, you have a total of 45 apples.",
+        "target_word_A": "42",
+        "target_word_B": "45"
     }
 ]

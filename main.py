@@ -1,73 +1,84 @@
 import os
 import json
-import glob
+import shutil
 from tqdm import tqdm
-
-from util import (
-    load_model,
-    get_model_attributes,
-    create_test_set,
-    analyze_pair_activations
-)
+from util import load_model, analyze_and_save_activations
 from visual import generate_all_plots
 
+# --- Configuration ---
+MODEL_NAME = 'large' # Options: 'small', 'large'
+FAST_MODE = False    # If True, runs a quick test on 10% of the data.
+
+
+# --- Constants ---
+DATA_FILES = [
+    'dataset/syntax_pairs.json',
+    'dataset/math_pairs.json'
+]
+OUTPUT_DIR = 'output/data'
+IMAGES_DIR = 'output/images'
+
+
+def load_data():
+    """
+    Loads all sentence pairs from the specified data files, ensuring key consistency.
+    """
+    all_pairs = []
+    for file_path in DATA_FILES:
+        source_file = os.path.basename(file_path).replace('_pairs.json', '')
+        with open(file_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            for pair in data:
+                # Normalize sentence keys to 'A' and 'B' for consistency.
+                if 'sentence_A' in pair:
+                    pair['A'] = pair.pop('sentence_A')
+                if 'sentence_B' in pair:
+                    pair['B'] = pair.pop('sentence_B')
+                
+                # Add/overwrite 'catalog' from the filename to ensure it always exists and is correct.
+                # This is a defensive measure against inconsistent data sources.
+                pair['catalog'] = source_file
+                all_pairs.append(pair)
+    print(f"Loaded {len(all_pairs)} total pairs from data files.")
+    return all_pairs
+
+
+def clear_old_data(directory):
+    """
+    Clears old data from the output directory.
+    """
+    if os.path.exists(directory):
+        print(f"Clearing old data from {directory}...")
+        shutil.rmtree(directory)
+    os.makedirs(directory, exist_ok=True)
+    print("Old data cleared.")
+
+
 def main():
-    # Configuration
-    MODEL_NAME = 'gpt2-large'
-    DATA_FILES = [
-        os.path.join('dataset', 'syntax_pairs.json'),
-        os.path.join('dataset', 'math_pairs.json')
-    ]
-    BASE_OUTPUT_DIR = 'output'
-    OUTPUT_DIR_DATA = os.path.join(BASE_OUTPUT_DIR, 'data')
-    OUTPUT_DIR_IMAGES = os.path.join(BASE_OUTPUT_DIR, 'images')
-    os.makedirs(OUTPUT_DIR_IMAGES, exist_ok=True)
-    os.makedirs(OUTPUT_DIR_DATA, exist_ok=True)
-
-    # Create and load the test set
-    test_set = create_test_set(DATA_FILES)
-    print(f"Test set with {len(test_set)} pairs created and saved to dataset/test_set.json")
-
-    # Load model
+    """
+    Main function to run the analysis and generate plots.
+    """
+    # clear_old_data(OUTPUT_DIR) # Disabled for checkpointing
+    # clear_old_data(IMAGES_DIR) # Disabled for checkpointing
+    pairs = load_data()
     tokenizer, model = load_model(MODEL_NAME)
-    if model is None:
-        return
+    num_layers = model.config.num_hidden_layers
+    
+    print(f"Model has {num_layers} hidden layers.")
+    print(f"Activation vector length (hidden size): {model.config.hidden_size}")
+    print(f"\n--- Starting Analysis with model: '{MODEL_NAME}' ---")
 
-    num_layers, hidden_size = get_model_attributes(model)
-    layers_to_analyze = range(num_layers)
+    pairs_to_process = pairs
+    if FAST_MODE:
+        print("--- Running in FAST MODE: Processing 1 in every 10 pairs. ---")
+        pairs_to_process = [pair for i, pair in enumerate(pairs) if i % 10 == 0]
+        print(f"Reduced number of pairs from {len(pairs)} to {len(pairs_to_process)}.")
 
-    # Analysis
-    print("\n--- Starting Analysis ---")
-    for layer_to_extract in tqdm(layers_to_analyze, desc="Analyzing Layers"):
-        layer_results = {
-            "layer": layer_to_extract,
-            "pairs": []
-        }
-        json_filename = os.path.join(OUTPUT_DIR_DATA, f"layer_{layer_to_extract}.json")
+    for pair in tqdm(pairs_to_process, desc="Analyzing Pairs"):
+        analyze_and_save_activations(model, tokenizer, pair, num_layers)
 
-        if os.path.exists(json_filename):
-            continue # Skip if already processed
+    generate_all_plots(OUTPUT_DIR, IMAGES_DIR)
 
-        for pair in test_set:
-            pair_result = analyze_pair_activations(model, tokenizer, pair, layer_to_extract)
-            if pair_result is not None:
-                layer_results["pairs"].append(pair_result)
-
-        with open(json_filename, 'w') as f:
-            json.dump(layer_results, f, indent=4)
-
-    # Visualization
-    print("\n--- Analysis complete. Loading data for plotting... ---")
-
-    # Load all layer data for plotting
-    all_layer_data = []
-    json_files = sorted(glob.glob(os.path.join(OUTPUT_DIR_DATA, 'layer_*.json')), key=lambda x: int(os.path.basename(x).split('_')[1].split('.')[0]))
-    for f_path in tqdm(json_files, desc="Loading JSON files"):
-        with open(f_path, 'r') as f:
-            all_layer_data.append(json.load(f))
-
-    # Generate all plots
-    generate_all_plots(all_layer_data, hidden_size, num_layers, OUTPUT_DIR_IMAGES)
 
 if __name__ == "__main__":
     main()
