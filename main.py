@@ -1,84 +1,76 @@
 import os
-import json
-import shutil
+import glob
+import argparse
 from tqdm import tqdm
-from util import load_model, analyze_and_save_activations
-from visual import generate_all_plots
 
-# --- Configuration ---
-MODEL_NAME = 'large' # Options: 'small', 'large'
-FAST_MODE = False    # If True, runs a quick test on 10% of the data.
-
+# Import the refactored modules
+import activation
+import analysis
+import visual
 
 # --- Constants ---
-DATA_FILES = [
-    'dataset/syntax_pairs.json',
-    'dataset/math_pairs.json'
-]
-OUTPUT_DIR = 'output/data'
-IMAGES_DIR = 'output/images'
+# Automatically find all json files in the dataset directory
+DATASET_DIR = 'dataset'
+ACTIVATION_DIR = 'output/data'
+ANALYSIS_DIR = 'output/analysis'
+IMAGE_DIR = 'output/images'
 
+def main(args):
+    # --- Setup ---
+    os.makedirs(ACTIVATION_DIR, exist_ok=True)
+    os.makedirs(ANALYSIS_DIR, exist_ok=True)
+    os.makedirs(IMAGE_DIR, exist_ok=True)
 
-def load_data():
-    """
-    Loads all sentence pairs from the specified data files, ensuring key consistency.
-    """
-    all_pairs = []
-    for file_path in DATA_FILES:
-        source_file = os.path.basename(file_path).replace('_pairs.json', '')
-        with open(file_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            for pair in data:
-                # Normalize sentence keys to 'A' and 'B' for consistency.
-                if 'sentence_A' in pair:
-                    pair['A'] = pair.pop('sentence_A')
-                if 'sentence_B' in pair:
-                    pair['B'] = pair.pop('sentence_B')
-                
-                # Add/overwrite 'catalog' from the filename to ensure it always exists and is correct.
-                # This is a defensive measure against inconsistent data sources.
-                pair['catalog'] = source_file
-                all_pairs.append(pair)
-    print(f"Loaded {len(all_pairs)} total pairs from data files.")
-    return all_pairs
-
-
-def clear_old_data(directory):
-    """
-    Clears old data from the output directory.
-    """
-    if os.path.exists(directory):
-        print(f"Clearing old data from {directory}...")
-        shutil.rmtree(directory)
-    os.makedirs(directory, exist_ok=True)
-    print("Old data cleared.")
-
-
-def main():
-    """
-    Main function to run the analysis and generate plots.
-    """
-    # clear_old_data(OUTPUT_DIR) # Disabled for checkpointing
-    # clear_old_data(IMAGES_DIR) # Disabled for checkpointing
-    pairs = load_data()
-    tokenizer, model = load_model(MODEL_NAME)
-    num_layers = model.config.num_hidden_layers
+    # --- Stage 1: Extract Activations ---
+    print(f"--- Stage 1: Extracting Activations using model: '{args.model}' ---")
     
-    print(f"Model has {num_layers} hidden layers.")
-    print(f"Activation vector length (hidden size): {model.config.hidden_size}")
-    print(f"\n--- Starting Analysis with model: '{MODEL_NAME}' ---")
+    tokenizer, model, device = activation.load_model(args.model)
+    if not model:
+        print("Model loading failed. Exiting.")
+        return
 
-    pairs_to_process = pairs
-    if FAST_MODE:
-        print("--- Running in FAST MODE: Processing 1 in every 10 pairs. ---")
-        pairs_to_process = [pair for i, pair in enumerate(pairs) if i % 10 == 0]
-        print(f"Reduced number of pairs from {len(pairs)} to {len(pairs_to_process)}.")
+    num_layers = model.config.n_layer
+    print(f"Model has {num_layers} hidden layers and hidden size {model.config.n_embd}.")
 
-    for pair in tqdm(pairs_to_process, desc="Analyzing Pairs"):
-        analyze_and_save_activations(model, tokenizer, pair, num_layers)
+    # Find all corpus files to process
+    corpus_files = glob.glob(os.path.join(DATASET_DIR, '*.json'))
+    if args.fast:
+        print("--- Running in FAST MODE: Using only the first corpus file. ---")
+        corpus_files = corpus_files[:1]
 
-    generate_all_plots(OUTPUT_DIR, IMAGES_DIR)
+    for corpus_path in tqdm(corpus_files, desc="1/2 Extracting Activations"):
+        print(f"Processing corpus: {corpus_path}")
+        activation.process_corpus(model, tokenizer, corpus_path, num_layers, device)
+        
+    print("--- Activation extraction complete. ---")
+
+    # --- Stage 2: Performing DFT Difference Analysis ---
+    print("\n--- Stage 2: Performing DFT Difference Analysis ---")
+    analysis.analyze_dft_difference(ACTIVATION_DIR, ANALYSIS_DIR)
+    print("--- DFT difference analysis complete. ---")
+
+    # --- Stage 3: Generating Visualizations ---
+    print("\n--- Stage 3: Generating DFT Visualizations ---")
+    visual.generate_dft_plots(ANALYSIS_DIR, IMAGE_DIR)
+    print("--- Visualization complete. ---")
+    
+    print("\n--- Pipeline finished successfully! ---")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Run the LLM Topic Specificity analysis pipeline.")
+    parser.add_argument(
+        '--model', 
+        type=str, 
+        default='small', 
+        choices=['small', 'large'],
+        help="Model to use: 'small' for gpt2-small, 'large' for gpt2-large."
+    )
+    parser.add_argument(
+        '--fast',
+        action='store_true',
+        help="Enable fast mode. Processes only the first corpus file found."
+    )
+    
+    args = parser.parse_args()
+    main(args)
