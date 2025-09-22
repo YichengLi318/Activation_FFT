@@ -9,7 +9,8 @@ pio.templates.default = "plotly_white"
 def generate_dft_plots(analysis_dir='output/analysis', image_dir='output/images'):
     """
     Generates and saves interactive HTML plots comparing the DFT power spectra.
-    Each plot shows the top 5 differentiating dimensions for a single layer.
+    Each plot shows the top 5 differentiating dimensions for a single layer, 
+    with separate curves for 'novel' and 'science' corpora.
     """
     if not os.path.exists(image_dir):
         os.makedirs(image_dir)
@@ -39,25 +40,40 @@ def generate_dft_plots(analysis_dir='output/analysis', image_dir='output/images'
         title = f'Layer {layer_number}: Top 5 Differentiating Dimensions (DFT Power Spectrum)'
         
         fig = go.Figure()
-        colors = ['blue', 'red', 'green', 'purple', 'orange']
+        
+        # Define warm and cool color pairs for novel and science spectra
+        color_pairs = [('red', 'blue'), ('orange', 'cyan'), ('magenta', 'teal'), ('tomato', 'royalblue'), ('coral', 'deepskyblue')]
 
         for i, dim_index in enumerate(top_indices):
             spec_novel = novel_spectra[i]
             spec_science = science_spectra[i]
-            spec_diff = [n - s for n, s in zip(spec_novel, spec_science)]
+            
+            warm_color, cool_color = color_pairs[i % len(color_pairs)]
 
+            # Add trace for Novel spectrum (warm color)
             fig.add_trace(go.Scatter(
                 x=frequencies, 
-                y=spec_diff,
+                y=spec_novel,
                 mode='lines',
-                name=f'Dimension {dim_index}',
-                line=dict(color=colors[i % len(colors)])
+                name=f'Dimension {dim_index} (Novel)',
+                legendgroup=f'dim_{dim_index}',
+                line=dict(color=warm_color)
+            ))
+
+            # Add trace for Science spectrum (cool color)
+            fig.add_trace(go.Scatter(
+                x=frequencies, 
+                y=spec_science,
+                mode='lines',
+                name=f'Dimension {dim_index} (Science)',
+                legendgroup=f'dim_{dim_index}',
+                line=dict(color=cool_color)
             ))
 
         fig.update_layout(
             title=title,
             xaxis_title='Normalized Frequency',
-            yaxis_title='Power Spectrum Difference (Novel - Science)',
+            yaxis_title='Power Spectrum',
             legend_title="Dimensions",
             hovermode="x unified"
         )

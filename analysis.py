@@ -55,6 +55,7 @@ def analyze_dft_difference(input_dir, output_dir):
                 sum_abs_activations[sum_abs_activations == 0] = 1
                 normalized_activations = activations / sum_abs_activations
 
+                normalized_activations = normalized_activations - np.mean(normalized_activations, axis=1, keepdims=True)
                 fft_result = np.fft.fft(normalized_activations, axis=1)
                 power_spectrum = np.abs(fft_result)**2
 
