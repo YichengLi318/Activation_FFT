@@ -1,8 +1,19 @@
 # Fourier_Interpreter (demo)
 ## 模型
-本项目现使用 `Qwen2.5-1.5B-Instruct-AWQ`（约1.5B，AWQ量化，中文支持，LLaMA风格的纯解码器结构）。
-模型需放置在本地 `model/Qwen2.5-1.5B-Instruct-AWQ` 目录下。
+本项目现使用 `Qwen3-1.7B`（约1.7B，非量化，中文支持，LLaMA风格的纯解码器结构）。
+模型需放置在本地 `model/Qwen3-1.7B` 目录下。
 运行时会打印模型的隐藏层数、隐藏维度与注意力头数以供确认。
+
+**版本要求**
+
+- `transformers>=4.51.0`
+
+**显存建议**
+
+- **FP16**：约 4 GB
+- **8-bit**：约 2.5 GB
+- **4-bit**：约 2 GB
+
 ## 测试用例
 一个句子对，其内容为**语法(syntax)**或**数学(math)**，每个大类型下面还有多个细分类型。可以在dataset文件中查看所有测试用例。其形式如
 {
@@ -30,16 +41,16 @@
 
 在本地准备好模型目录：
 
-- `model/Qwen2.5-1.5B-Instruct-AWQ/`（包含 `config.json`, `model.safetensors`, `tokenizer.json` 等文件）。
+- `model/Qwen3-1.7B/`（包含 `config.json`, `model.safetensors`, `tokenizer.json` 等文件）。
 
 运行管线：
 
 ```
-python main.py --model_dir Qwen2.5-1.5B-Instruct-AWQ --fast
+python main.py --model_dir Qwen3-1.7B --fast
 ```
 
-如未安装 `autoawq`，建议：
+如需下载模型，可运行：
 
 ```
-pip install autoawq
+python scripts/download_qwen3_1_7b.py
 ```
