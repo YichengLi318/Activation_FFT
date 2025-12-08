@@ -209,8 +209,8 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-model/
-output/
+/model/
+/output/
 *.pptx
 
 # Large data files
