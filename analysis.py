@@ -3,41 +3,54 @@ import os
 import numpy as np
 from tqdm import tqdm
 import glob
+import re
 
-def analyze_dft_difference(input_dir, output_dir):
+
+def analyze_dft_difference(input_dir, output_dir, selected_dims):
     """
-    Analyzes the DFT difference between two categories of text data for each layer.
-    This version streams data from individual JSON files, calculates FFT for each, 
-    interpolates to a common frequency axis, and then averages the spectra.
+    Performs DFT analysis per layer for each text category.
+    - Supports input structure: output/data/<dataset>/<category>/layer_<idx>/sample_*.json
+    - Saves results under output/analysis/<dataset>/layer_<idx>/dft_analysis_<category>_<dataset>_layer<idx>.json
+    - Uses actual frequency values (cycles/token) without interpolation.
+    - If selected_dims is None, randomly pick up to 20 dims from first sample.
     """
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+    dataset_name = os.path.basename(os.path.normpath(input_dir))
 
-    common_freq_axis = np.linspace(0, 0.5, 512)
+    os.makedirs(output_dir, exist_ok=True)
 
-    layer_folders = [d for d in os.listdir(input_dir) if os.path.isdir(os.path.join(input_dir, d))]
+    # Categories under input_dir
+    categories = sorted([d for d in os.listdir(input_dir) if os.path.isdir(os.path.join(input_dir, d))])
+    if not categories:
+        print(f"Warning: No categories found in {input_dir}.")
+        return
 
-    for layer_folder in tqdm(layer_folders, desc="Analyzing Layers"):
-        layer_path = os.path.join(input_dir, layer_folder)
-        analysis_layer_path = os.path.join(output_dir, layer_folder)
+    # Collect available layers by scanning the first category
+    first_cat_layers = sorted([d for d in os.listdir(os.path.join(input_dir, categories[0])) if d.startswith('layer_') and os.path.isdir(os.path.join(input_dir, categories[0], d))])
+    if not first_cat_layers:
+        print(f"Warning: No layer directories found under category '{categories[0]}' in {input_dir}.")
+        return
+
+    for layer_dir in tqdm(first_cat_layers, desc="Analyzing Layers Individually"):
+        m = re.search(r"layer[ _](\d+)", layer_dir)
+        layer_number = m.group(1) if m else layer_dir
+        analysis_layer_path = os.path.join(output_dir, f"layer_{layer_number}")
         os.makedirs(analysis_layer_path, exist_ok=True)
 
-        final_spectra = {}
-
-        for category in ['novel', 'science']:
-            category_path = os.path.join(layer_path, category)
-            if not os.path.exists(category_path):
-                print(f"Warning: {category_path} not found for layer {layer_folder}. Skipping category.")
+        for category in tqdm(categories, desc=f"Layer {layer_dir} - Processing Categories", leave=False):
+            category_path = os.path.join(input_dir, category, layer_dir)
+            if not os.path.isdir(category_path):
                 continue
-
             activation_files = glob.glob(os.path.join(category_path, '*.json'))
             if not activation_files:
                 print(f"Warning: No activation files found in {category_path}. Skipping category.")
                 continue
 
-            interpolated_spectra_list = []
-            
-            for file_path in tqdm(activation_files, desc=f"Processing {category}", leave=False):
+            spectra_list = []
+            valid_selected = None
+            freq_axis = None
+            seq_len_meta = None
+
+            for file_path in activation_files:
                 with open(file_path, 'r') as f:
                     try:
                         data = json.load(f)
@@ -48,57 +61,56 @@ def analyze_dft_difference(input_dir, output_dir):
 
                 if activations.ndim < 2 or activations.shape[0] < 2 or activations.shape[1] == 0:
                     continue
-                
-                activations = activations.T
-                
-                sum_abs_activations = np.sum(np.abs(activations), axis=1, keepdims=True)
-                sum_abs_activations[sum_abs_activations == 0] = 1
-                normalized_activations = activations / sum_abs_activations
 
-                normalized_activations = normalized_activations - np.mean(normalized_activations, axis=1, keepdims=True)
-                fft_result = np.fft.fft(normalized_activations, axis=1)
-                power_spectrum = np.abs(fft_result)**2
+                activations = activations.T  # dims x seq_len
+                activations = activations - np.mean(activations, axis=1, keepdims=True)
+                window = np.hanning(activations.shape[1])
 
-                num_samples = normalized_activations.shape[1]
-                original_freq_axis = np.fft.fftfreq(num_samples, d=1)[:num_samples // 2]
-                
-                one_sided_power_spectrum = power_spectrum[:, :num_samples // 2]
+                # Randomly select dims if not provided (use first file's shape)
+                if valid_selected is None:
+                    if selected_dims and len(selected_dims) > 0:
+                        valid_selected = [d for d in selected_dims if 0 <= d < activations.shape[0]]
+                    else:
+                        rng = np.random.default_rng()
+                        valid_selected = rng.choice(activations.shape[0], size=min(20, activations.shape[0]), replace=False).tolist()
+                    if len(valid_selected) == 0:
+                        continue
 
-                if len(original_freq_axis) == 0:
-                    continue
+                sel_acts = activations[valid_selected, :]
+                windowed_activations = sel_acts * window
 
-                interpolated_spectrum_for_text = np.array([
-                    np.interp(common_freq_axis, original_freq_axis, dim_spectrum)
-                    for dim_spectrum in one_sided_power_spectrum
-                ])
-                interpolated_spectra_list.append(interpolated_spectrum_for_text)
+                # Use one-sided real FFT and absolute frequency axis derived from padded token length
+                num_samples = sel_acts.shape[1]
+                rfft_result = np.fft.rfft(windowed_activations, axis=1)
+                power_spectrum = np.abs(rfft_result)**2
+                current_freq_axis = np.fft.rfftfreq(num_samples, d=1)
 
-            if interpolated_spectra_list:
-                avg_power_spectrum = np.mean(interpolated_spectra_list, axis=0)
-                final_spectra[category] = avg_power_spectrum
-            else:
-                print(f"Warning: No valid data to process for category '{category}' in layer {layer_folder}.")
+                if freq_axis is None:
+                    freq_axis = current_freq_axis
+                    seq_len_meta = int(num_samples)
+                spectra_list.append(power_spectrum)
 
-        if 'novel' not in final_spectra or 'science' not in final_spectra:
-            print(f"Warning: Skipping layer {layer_folder} due to missing data for comparison.")
-            continue
+            if not spectra_list:
+                print(f"Warning: No valid spectra generated for category {category} in layer {layer_dir}.")
+                continue
 
-        novel_spectrum = final_spectra['novel']
-        science_spectrum = final_spectra['science']
-        
-        mse = np.mean((novel_spectrum - science_spectrum)**2, axis=1)
-        
-        top_5_diff_indices = np.argsort(mse)[-5:][::-1]
+            all_spectra = np.array(spectra_list)  # texts x dims x freqs
+            mean_spectra = np.mean(all_spectra, axis=0)
+            std_spectra = np.std(all_spectra, axis=0)
 
-        analysis_result = {
-            'top_5_diff_indices': top_5_diff_indices.tolist(),
-            'novel_spectra_top_5': novel_spectrum[top_5_diff_indices].tolist(),
-            'science_spectra_top_5': science_spectrum[top_5_diff_indices].tolist(),
-            'normalized_frequency_axis': common_freq_axis.tolist()
-        }
+            category_label = f"{category}_{dataset_name}"
+            output_data = {
+                "category": category_label,
+                "selected_indices": valid_selected if valid_selected is not None else (selected_dims or []),
+                "spectra_selected": mean_spectra.tolist(),
+                "std_selected": std_spectra.tolist(),
+                "frequency_axis": (freq_axis.tolist() if freq_axis is not None else []),
+                "sequence_length": seq_len_meta if seq_len_meta is not None else 0,
+            }
 
-        output_file = os.path.join(analysis_layer_path, 'dft_analysis.json')
-        with open(output_file, 'w') as f:
-            json.dump(analysis_result, f, indent=4)
+            output_filename = f'dft_analysis_{category}_{dataset_name}_layer{layer_number}.json'
+            output_file = os.path.join(analysis_layer_path, output_filename)
+            with open(output_file, 'w') as f:
+                json.dump(output_data, f, indent=4)
 
-    print(f"DFT difference analysis completed for all layers.")
+    print(f"Individual DFT analysis completed for dataset '{dataset_name}'.")

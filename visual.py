@@ -1,87 +1,108 @@
 import json
 import os
-import plotly.graph_objects as go
+import shutil
+import numpy as np
 from tqdm import tqdm
-import plotly.io as pio
+import glob
+import re
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
-pio.templates.default = "plotly_white"
-
-def generate_dft_plots(analysis_dir='output/analysis', image_dir='output/images'):
+def generate_dft_plots(analysis_dir, image_dir, baseline_analysis_dir=None, use_period_axis=False):
     """
-    Generates and saves interactive HTML plots comparing the DFT power spectra.
-    Each plot shows the top 5 differentiating dimensions for a single layer, 
-    with separate curves for 'novel' and 'science' corpora.
+    使用 Matplotlib 生成静态图（按数据集分目录）：
+    - 对单个数据集的各类别、各层绘制选定维度的功率谱均值（不绘制标准差阴影）。
+    - baseline_analysis_dir 参数将被忽略（不绘制差分）。
+    - 图像按 image/<dataset_name>/ 保存，文件名包含数据集名与层号。
+    - 新增 use_period_axis：为 True 时，横轴用周期（tokens/cycle），否则为频率（cycles/token）。
     """
-    if not os.path.exists(image_dir):
-        os.makedirs(image_dir)
+    dataset_name = os.path.basename(os.path.normpath(analysis_dir))
 
-    layer_folders = [f for f in os.listdir(analysis_dir) if os.path.isdir(os.path.join(analysis_dir, f))]
+    # 清空该数据集的图像目录
+    if os.path.exists(image_dir):
+        try:
+            shutil.rmtree(image_dir)
+        except Exception:
+            for root, dirs, files in os.walk(image_dir):
+                for fn in files:
+                    try:
+                        os.remove(os.path.join(root, fn))
+                    except Exception:
+                        pass
+    os.makedirs(image_dir, exist_ok=True)
 
-    for layer_folder in tqdm(layer_folders, desc="Generating DFT Plots"):
-        analysis_filepath = os.path.join(analysis_dir, layer_folder, 'dft_analysis.json')
-        
-        if not os.path.exists(analysis_filepath):
-            print(f"Skipping {layer_folder} because dft_analysis.json not found.")
+    # 仅遍历 layer_* 目录，避免误读历史目录
+    layer_folders = sorted([
+        f for f in os.listdir(analysis_dir)
+        if f.startswith('layer_') and os.path.isdir(os.path.join(analysis_dir, f))
+    ])
+
+    for layer_folder in tqdm(layer_folders, desc="Generating Matplotlib Plots"):
+        layer_analysis_path = os.path.join(analysis_dir, layer_folder)
+        analysis_files = glob.glob(os.path.join(layer_analysis_path, 'dft_analysis_*.json'))
+        if not analysis_files:
+            print(f"Skipping {layer_folder} because no analysis files were found.")
             continue
 
-        with open(analysis_filepath, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+        for af in analysis_files:
+            try:
+                with open(af, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+            except Exception:
+                continue
 
-        top_indices = data.get('top_5_diff_indices', [])
-        novel_spectra = data.get('novel_spectra_top_5', [])
-        science_spectra = data.get('science_spectra_top_5', [])
-        frequencies = data.get('normalized_frequency_axis', [])
+            category = data.get('category', '')
+            m = re.match(rf'^(.*)_({re.escape(dataset_name)})$', category)
+            base_category = m.group(1) if m else category
 
-        if not all([top_indices, novel_spectra, science_spectra, frequencies]):
-            print(f"Skipping {layer_folder} due to missing or empty data in JSON.")
-            continue
+            freq = np.array(data.get('frequency_axis', []))
+            mean_sel = np.array(data.get('spectra_selected', []))
+            std_sel = np.array(data.get('std_selected', []))
+            selected = data.get('selected_indices', [])
 
-        layer_number = layer_folder.split('_')[-1]
-        title = f'Layer {layer_number}: Top 5 Differentiating Dimensions (DFT Power Spectrum)'
-        
-        fig = go.Figure()
-        
-        # Define warm and cool color pairs for novel and science spectra
-        color_pairs = [('red', 'blue'), ('orange', 'cyan'), ('magenta', 'teal'), ('tomato', 'royalblue'), ('coral', 'deepskyblue')]
+            if not (freq.size and mean_sel.size):
+                continue
 
-        for i, dim_index in enumerate(top_indices):
-            spec_novel = novel_spectra[i]
-            spec_science = science_spectra[i]
-            
-            warm_color, cool_color = color_pairs[i % len(color_pairs)]
+            # 频率裁剪（去掉最低频段，与分析阶段保持一致）
+            freq = freq[7:]
+            mean_sel = mean_sel[:, 7:]
+            std_sel = std_sel[:, 7:]
 
-            # Add trace for Novel spectrum (warm color)
-            fig.add_trace(go.Scatter(
-                x=frequencies, 
-                y=spec_novel,
-                mode='lines',
-                name=f'Dimension {dim_index} (Novel)',
-                legendgroup=f'dim_{dim_index}',
-                line=dict(color=warm_color)
-            ))
+            # 选择横轴：频率或周期
+            if use_period_axis:
+                # 由于已裁剪低频，freq 不含 0；为稳健起见仍做保护
+                safe_freq = np.where(freq == 0, np.nan, freq)
+                x_axis = 1.0 / safe_freq
+                x_label = 'Period (tokens/cycle)'
+            else:
+                x_axis = freq
+                x_label = 'Frequency (cycles/token)'
 
-            # Add trace for Science spectrum (cool color)
-            fig.add_trace(go.Scatter(
-                x=frequencies, 
-                y=spec_science,
-                mode='lines',
-                name=f'Dimension {dim_index} (Science)',
-                legendgroup=f'dim_{dim_index}',
-                line=dict(color=cool_color)
-            ))
+            # 提取层号
+            m_layer = re.search(r"layer[ _](\d+)", layer_folder)
+            layer_number = m_layer.group(1) if m_layer else layer_folder
 
-        fig.update_layout(
-            title=title,
-            xaxis_title='Normalized Frequency',
-            yaxis_title='Power Spectrum',
-            legend_title="Dimensions",
-            hovermode="x unified"
-        )
-        
-        output_path = os.path.join(image_dir, f'{layer_folder}_dft_comparison.html')
-        fig.write_html(output_path)
+            colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd']
 
-    print(f"DFT plots generated and saved in {image_dir}")
+            fig, ax = plt.subplots(figsize=(10, 6))
+            for i in range(mean_sel.shape[0]):
+                mean = mean_sel[i]
+                color = colors[i % len(colors)]
+                ax.plot(x_axis, mean, color=color, label=f'Dim {selected[i]}')
+
+            ax.set_title(f'{dataset_name} - Layer {layer_number}: {base_category}')
+            ax.set_xlabel(x_label)
+            ax.set_ylabel('Power Spectrum')
+            ax.legend()
+            ax.grid(True, linestyle='--', alpha=0.3)
+
+            out_ds = os.path.join(image_dir, f'{dataset_name}_{layer_number}.png')
+            fig.savefig(out_ds, dpi=150, bbox_inches='tight')
+            plt.close(fig)
+
+    print(f"All required PNG plots generated in {image_dir}")
 
 if __name__ == '__main__':
-    generate_dft_plots()
+    # Example direct run (kept in sync with new output paths)
+    generate_dft_plots(analysis_dir='output/analysis/cn_peoms', image_dir='output/image/cn_peoms')

@@ -9,68 +9,91 @@ import analysis
 import visual
 
 # --- Constants ---
-# Automatically find all json files in the dataset directory
 DATASET_DIR = 'dataset'
-ACTIVATION_DIR = 'output/data'
-ANALYSIS_DIR = 'output/analysis'
-IMAGE_DIR = 'output/images'
 
-def main(args):
-    # --- Setup ---
-    os.makedirs(ACTIVATION_DIR, exist_ok=True)
-    os.makedirs(ANALYSIS_DIR, exist_ok=True)
-    os.makedirs(IMAGE_DIR, exist_ok=True)
 
-    # --- Stage 1: Extract Activations ---
-    print(f"--- Stage 1: Extracting Activations using model: '{args.model}' ---")
-    
-    tokenizer, model, device = activation.load_model(args.model)
+def run_extract(args):
+    print(f"--- Extracting Activations using model dir: '{args.model_dir}' ---")
+    tokenizer, model, device = activation.load_model(args.model_dir)
     if not model:
         print("Model loading failed. Exiting.")
         return
 
-    num_layers = model.config.n_layer
-    print(f"Model has {num_layers} hidden layers and hidden size {model.config.n_embd}.")
+    num_layers = getattr(model.config, 'num_hidden_layers', getattr(model.config, 'n_layer', None))
+    hidden_size = getattr(model.config, 'hidden_size', getattr(model.config, 'n_embd', None))
+    num_heads = getattr(model.config, 'num_attention_heads', getattr(model.config, 'n_head', None))
+    print(f"Model layers: {num_layers}, hidden size: {hidden_size}, attention heads: {num_heads}.")
 
-    # Find all corpus files to process
-    corpus_files = glob.glob(os.path.join(DATASET_DIR, '*.json'))
-    if args.fast:
-        print("--- Running in FAST MODE: Using only the first corpus file. ---")
-        corpus_files = corpus_files[:1]
+    # Find corpus files to process
+    if args.dataset_file:
+        target_path = os.path.join(DATASET_DIR, args.dataset_file)
+        if not os.path.exists(target_path):
+            print(f"Error: dataset file not found: {target_path}")
+            return
+        corpus_files = [target_path]
+        print(f"Using specified dataset file: {target_path}")
+    else:
+        corpus_files = glob.glob(os.path.join(DATASET_DIR, '*.json'))
+        if args.fast:
+            print("--- FAST MODE: Using only the first corpus file. ---")
+            corpus_files = corpus_files[:1]
 
-    for corpus_path in tqdm(corpus_files, desc="1/2 Extracting Activations"):
+    for corpus_path in tqdm(corpus_files, desc="Extracting Activations"):
         print(f"Processing corpus: {corpus_path}")
-        activation.process_corpus(model, tokenizer, corpus_path, num_layers, device)
-        
+        activation.process_corpus(model, tokenizer, corpus_path, num_layers, device, args.fast)
     print("--- Activation extraction complete. ---")
 
-    # --- Stage 2: Performing DFT Difference Analysis ---
-    print("\n--- Stage 2: Performing DFT Difference Analysis ---")
-    analysis.analyze_dft_difference(ACTIVATION_DIR, ANALYSIS_DIR)
-    print("--- DFT difference analysis complete. ---")
 
-    # --- Stage 3: Generating Visualizations ---
-    print("\n--- Stage 3: Generating DFT Visualizations ---")
-    visual.generate_dft_plots(ANALYSIS_DIR, IMAGE_DIR)
+def run_dft_and_plot(args):
+    if not args.dataset_file:
+        print("Error: --dataset_file is required for DFT and plotting mode.")
+        return
+
+    dataset_name = os.path.splitext(os.path.basename(args.dataset_file))[0]
+    selected_dims = None
+    if args.dims:
+        parsed = [int(x.strip()) for x in args.dims.split(',') if x.strip().isdigit()]
+        selected_dims = parsed if parsed else None
+
+    input_dir = os.path.join('output', 'data', dataset_name)
+    output_dir = os.path.join('output', 'analysis', dataset_name)
+    image_dir = os.path.join('output', 'image', dataset_name)
+
+    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(image_dir, exist_ok=True)
+
+    print(f"--- Performing DFT Analysis for dataset '{dataset_name}' ---")
+    analysis.analyze_dft_difference(input_dir, output_dir, selected_dims)
+    print("--- DFT analysis complete. ---")
+
+    baseline_dir = None
+    if args.baseline_file:
+        baseline_name = os.path.splitext(os.path.basename(args.baseline_file))[0]
+        baseline_dir = os.path.join('output', 'analysis', baseline_name)
+        print(f"Using baseline dataset analysis from '{baseline_dir}' if available.")
+
+    print(f"--- Generating PNG Visualizations for dataset '{dataset_name}' ---")
+    visual.generate_dft_plots(output_dir, image_dir, baseline_analysis_dir=baseline_dir)
     print("--- Visualization complete. ---")
-    
-    print("\n--- Pipeline finished successfully! ---")
+
+
+def main(args):
+    if args.mode == 'extract':
+        run_extract(args)
+    elif args.mode == 'dft':
+        run_dft_and_plot(args)
+    else:
+        print(f"Unknown mode: {args.mode}")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run the LLM Topic Specificity analysis pipeline.")
-    parser.add_argument(
-        '--model', 
-        type=str, 
-        default='small', 
-        choices=['small', 'large'],
-        help="Model to use: 'small' for gpt2-small, 'large' for gpt2-large."
-    )
-    parser.add_argument(
-        '--fast',
-        action='store_true',
-        help="Enable fast mode. Processes only the first corpus file found."
-    )
-    
+    parser = argparse.ArgumentParser(description="LLM DFT pipeline: extract activations or run DFT+plot.")
+    parser.add_argument('--mode', type=str, choices=['extract', 'dft'], default='extract', help="Run mode: 'extract' or 'dft'.")
+    parser.add_argument('--model_dir', type=str, default='Qwen3-1.7B', help="Local folder under 'model/' or a HF model id (e.g., 'Qwen/Qwen3-1.7B').")
+    parser.add_argument('--dataset_file', type=str, default=None, help="Dataset JSON filename under 'dataset/' (e.g., cn_peoms.json).")
+    parser.add_argument('--baseline_file', type=str, default=None, help="Optional baseline dataset JSON filename under 'dataset/'.")
+    parser.add_argument('--fast', action='store_true', help="Enable fast mode in extraction: only process first corpus file and few texts.")
+    parser.add_argument('--dims', type=str, default=None, help="Comma-separated dimensions to analyze (optional; defaults to random 5).")
+
     args = parser.parse_args()
     main(args)
