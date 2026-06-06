@@ -1,5 +1,6 @@
 # LLM DFT
 
+<<<<<<< HEAD
 This repository studies frequency-domain structure in LLM hidden activations.
 
 ## Research Idea
@@ -51,6 +52,30 @@ This supports the interpretation that high-frequency components carry fine-grain
 
 ## Repository Layout
 
+=======
+This repository studies frequency-domain structure in LLM hidden activations. The core workflow is intentionally narrow:
+
+1. Extract hidden states from an internal layer.
+2. Apply DFT or rFFT along the token axis.
+3. Inspect amplitude and power-spectrum patterns across layers.
+4. Edit selected frequency bands and inject the signal back into the model.
+5. Compare frequency-domain perturbations with activation-domain perturbations on locality and agreement-style tasks.
+
+## What Is Kept
+
+- `main.py`: unified entry point for activation extraction, DFT analysis, and spectral perturbation.
+- `function/activation.py`: model loading and hidden-state extraction.
+- `function/analysis.py`: DFT analysis and spectrum export.
+- `function/perturb.py`: frequency editing and round-trip injection.
+- `function/visual.py`: static spectrum plotting.
+- `scripts/run_agreement_compare.py`: main locality and agreement experiment driver.
+- `scripts/plot_locality_results.py`: plot utility for locality experiments.
+- `configs/`: experiment configuration files.
+- `results/`: curated public-facing figures and a short results summary.
+
+## Repository Layout
+
+>>>>>>> 22216ed345cc05dfa9b66897e4e6896da6857841
 ```text
 LLM_DFT/
 ├─ main.py
@@ -62,7 +87,11 @@ LLM_DFT/
 └─ model/
 ```
 
+<<<<<<< HEAD
 `results/` contains a short summary and a small set of selected figures that are suitable for GitHub.
+=======
+`results/` is now intentionally minimal. It only contains a short summary and a small set of selected figures that are suitable for GitHub.
+>>>>>>> 22216ed345cc05dfa9b66897e4e6896da6857841
 
 ## Quick Start
 
@@ -96,16 +125,32 @@ python main.py --mode perturb --dataset_file path/to/your_dataset.json --model_d
 
 ## Published Results
 
+<<<<<<< HEAD
 The public `results/` folder includes a short summary of the main findings together with a few representative figures:
+=======
+The repository does not keep full raw result archives anymore. Instead, the public `results/` folder only contains:
+>>>>>>> 22216ed345cc05dfa9b66897e4e6896da6857841
 
 - a compact English summary of completed experiments
 - a few selected spectrum figures for Chinese poem data
 - a few selected locality figures
 
+<<<<<<< HEAD
 This keeps the repository easy to browse while preserving the main empirical story.
+=======
+This keeps the repository small and easy to browse while preserving the main empirical story.
+>>>>>>> 22216ed345cc05dfa9b66897e4e6896da6857841
 
 ## Notes
 
 - `model/` is local-only and should not be committed.
 - large datasets under `dataset/` are local-only by default
+<<<<<<< HEAD
 - plotting scripts remain in the repository and can still be used with locally generated outputs
+=======
+- plotting scripts remain in the repository, but the public tree no longer ships all raw intermediate outputs they were originally generated from
+
+## Current Scope
+
+This repository is now positioned as a compact research archive and reproduction entry point rather than a dumping ground for one-off scripts and full raw outputs.
+>>>>>>> 22216ed345cc05dfa9b66897e4e6896da6857841
