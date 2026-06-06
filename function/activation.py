@@ -12,13 +12,13 @@ os.environ.setdefault('TOKENIZERS_PARALLELISM', 'false')
 
 def load_model(model_dir_name: str = 'Qwen3-1.7B'):
     """
-    简化版模型加载，仅支持当前单一模型（Qwen3-1.7B 或对应 HF 仓库名）。
-    - 优先从本地 'model/<model_dir_name>' 目录加载；若不存在则按 HF 仓库名加载。
-    - 统一设置右侧填充；如无 pad_token 则使用 eos_token 作为 pad_token（不新增词表）。
-    - 根据设备选择 dtype：CUDA 用 float16，CPU 用 float32。
-    返回 (tokenizer, model, device)。
+    Load a local/HF CausalLM model and tokenizer.
+    Stable path:
+    - Always load with device_map=None first.
+    - If CUDA is available, move model to CUDA explicitly after loading.
     """
-    model_path = os.path.join(os.path.dirname(__file__), 'model', model_dir_name)
+    project_root = os.path.dirname(os.path.dirname(__file__))
+    model_path = os.path.join(project_root, 'model', model_dir_name)
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     dtype = torch.float16 if device == 'cuda' else torch.float32
@@ -27,7 +27,6 @@ def load_model(model_dir_name: str = 'Qwen3-1.7B'):
     print(f"========================================")
 
     def _prepare_tokenizer_model(tokenizer, model):
-        # 统一右侧填充；如无 pad_token，直接复用 eos_token，避免新增词表与 resize
         tokenizer.padding_side = 'right'
         if tokenizer.pad_token is None:
             try:
@@ -37,29 +36,32 @@ def load_model(model_dir_name: str = 'Qwen3-1.7B'):
         model.eval()
         return tokenizer, model
 
-    # 优先本地加载，其次按 HF 仓库名加载；无多余回退分支
-    if os.path.exists(model_path):
+    def _load_causal_lm(path_or_repo: str):
+        model = AutoModelForCausalLM.from_pretrained(
+            path_or_repo,
+            dtype=dtype,
+            device_map=None,
+            low_cpu_mem_usage=True,
+        )
+        if device == 'cuda':
+            model = model.to(device)
+        return model
+
+    local_config = os.path.join(model_path, 'config.json')
+    if os.path.exists(model_path) and os.path.exists(local_config):
         print(f"Loading local model from '{model_path}'...")
         tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=True)
-        model = AutoModelForCausalLM.from_pretrained(
-            model_path,
-            torch_dtype=dtype,
-            device_map='auto' if device == 'cuda' else None,
-        )
+        model = _load_causal_lm(model_path)
         tokenizer, model = _prepare_tokenizer_model(tokenizer, model)
         print("Model loaded successfully.")
         return tokenizer, model, device
-    else:
-        print(f"Loading HF model '{model_dir_name}'...")
-        tokenizer = AutoTokenizer.from_pretrained(model_dir_name, use_fast=True)
-        model = AutoModelForCausalLM.from_pretrained(
-            model_dir_name,
-            torch_dtype=dtype,
-            device_map='auto' if device == 'cuda' else None,
-        )
-        tokenizer, model = _prepare_tokenizer_model(tokenizer, model)
-        print("HF model loaded successfully.")
-        return tokenizer, model, device
+
+    print(f"Loading HF model '{model_dir_name}'...")
+    tokenizer = AutoTokenizer.from_pretrained(model_dir_name, use_fast=True)
+    model = _load_causal_lm(model_dir_name)
+    tokenizer, model = _prepare_tokenizer_model(tokenizer, model)
+    print("HF model loaded successfully.")
+    return tokenizer, model, device
 
 
 def _compute_uniform_token_length(tokenizer, texts, fast_mode=False) -> int:

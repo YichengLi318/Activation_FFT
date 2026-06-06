@@ -13,6 +13,7 @@ def analyze_dft_difference(input_dir, output_dir, selected_dims):
     - Saves results under output/analysis/<dataset>/layer_<idx>/dft_analysis_<category>_<dataset>_layer<idx>.json
     - Uses actual frequency values (cycles/token) without interpolation.
     - If selected_dims is None, randomly pick up to 20 dims from first sample.
+    - Also stores amplitude and phase so later frequency-domain inversion is possible.
     """
     dataset_name = os.path.basename(os.path.normpath(input_dir))
 
@@ -45,10 +46,11 @@ def analyze_dft_difference(input_dir, output_dir, selected_dims):
                 print(f"Warning: No activation files found in {category_path}. Skipping category.")
                 continue
 
-            spectra_list = []
+            power_list = []
             valid_selected = None
             freq_axis = None
             seq_len_meta = None
+            per_sample_amp_phase = []
 
             for file_path in activation_files:
                 with open(file_path, 'r') as f:
@@ -82,28 +84,43 @@ def analyze_dft_difference(input_dir, output_dir, selected_dims):
                 # Use one-sided real FFT and absolute frequency axis derived from padded token length
                 num_samples = sel_acts.shape[1]
                 rfft_result = np.fft.rfft(windowed_activations, axis=1)
-                power_spectrum = np.abs(rfft_result)**2
+                amplitude = np.abs(rfft_result)
+                phase = np.angle(rfft_result)
+                power_spectrum = amplitude**2
                 current_freq_axis = np.fft.rfftfreq(num_samples, d=1)
 
                 if freq_axis is None:
                     freq_axis = current_freq_axis
                     seq_len_meta = int(num_samples)
-                spectra_list.append(power_spectrum)
+                power_list.append(power_spectrum)
+                per_sample_amp_phase.append({
+                    "file": os.path.basename(file_path),
+                    "amplitude": amplitude.tolist(),
+                    "phase": phase.tolist(),
+                })
 
-            if not spectra_list:
+            if not power_list:
                 print(f"Warning: No valid spectra generated for category {category} in layer {layer_dir}.")
                 continue
 
-            all_spectra = np.array(spectra_list)  # texts x dims x freqs
-            mean_spectra = np.mean(all_spectra, axis=0)
-            std_spectra = np.std(all_spectra, axis=0)
+            all_power = np.array(power_list)  # texts x dims x freqs
+            mean_power = np.mean(all_power, axis=0)
+            std_power = np.std(all_power, axis=0)
+
+            amplitude_array = np.array([item["amplitude"] for item in per_sample_amp_phase])
+            phase_array = np.array([item["phase"] for item in per_sample_amp_phase])
+            mean_amplitude = np.mean(amplitude_array, axis=0)
+            std_amplitude = np.std(amplitude_array, axis=0)
 
             category_label = f"{category}_{dataset_name}"
             output_data = {
                 "category": category_label,
                 "selected_indices": valid_selected if valid_selected is not None else (selected_dims or []),
-                "spectra_selected": mean_spectra.tolist(),
-                "std_selected": std_spectra.tolist(),
+                "spectra_selected": mean_power.tolist(),  # Legacy field: mean power spectrum
+                "std_selected": std_power.tolist(),       # Legacy field: power spectrum stddev
+                "amplitude_mean": mean_amplitude.tolist(),
+                "amplitude_std": std_amplitude.tolist(),
+                "samples": per_sample_amp_phase,          # Per-sample amplitude and phase
                 "frequency_axis": (freq_axis.tolist() if freq_axis is not None else []),
                 "sequence_length": seq_len_meta if seq_len_meta is not None else 0,
             }

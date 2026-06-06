@@ -211,10 +211,11 @@ __marimo__/
 
 /model/
 /output/
+.vscode/
 *.pptx
+*.tar.gz
+AGENT_HANDOFF_*.md
+_tmp_*.py
 
 # Large data files
-dataset/imdb/IMDB Dataset.csv
-dataset/news/News_Category_Dataset_v3.json
-dataset/tiny_story/
-dataset/cn_poems/
+/dataset/*

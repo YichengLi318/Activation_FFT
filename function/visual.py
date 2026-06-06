@@ -11,15 +11,15 @@ import matplotlib.pyplot as plt
 
 def generate_dft_plots(analysis_dir, image_dir, baseline_analysis_dir=None, use_period_axis=False):
     """
-    使用 Matplotlib 生成静态图（按数据集分目录）：
-    - 对单个数据集的各类别、各层绘制选定维度的功率谱均值（不绘制标准差阴影）。
-    - baseline_analysis_dir 参数将被忽略（不绘制差分）。
-    - 图像按 image/<dataset_name>/ 保存，文件名包含数据集名与层号。
-    - 新增 use_period_axis：为 True 时，横轴用周期（tokens/cycle），否则为频率（cycles/token）。
+    Generate static Matplotlib plots for one dataset.
+    - Plot mean power spectra for selected dimensions across categories and layers.
+    - `baseline_analysis_dir` is ignored in this version and no difference plot is produced.
+    - Images are saved under image/<dataset_name>/ with the dataset name and layer index.
+    - When `use_period_axis` is True, the x-axis uses period (tokens/cycle) instead of frequency.
     """
     dataset_name = os.path.basename(os.path.normpath(analysis_dir))
 
-    # 清空该数据集的图像目录
+    # Reset the image directory for this dataset.
     if os.path.exists(image_dir):
         try:
             shutil.rmtree(image_dir)
@@ -32,7 +32,7 @@ def generate_dft_plots(analysis_dir, image_dir, baseline_analysis_dir=None, use_
                         pass
     os.makedirs(image_dir, exist_ok=True)
 
-    # 仅遍历 layer_* 目录，避免误读历史目录
+    # Only traverse layer_* directories to avoid stale or unrelated folders.
     layer_folders = sorted([
         f for f in os.listdir(analysis_dir)
         if f.startswith('layer_') and os.path.isdir(os.path.join(analysis_dir, f))
@@ -64,14 +64,14 @@ def generate_dft_plots(analysis_dir, image_dir, baseline_analysis_dir=None, use_
             if not (freq.size and mean_sel.size):
                 continue
 
-            # 频率裁剪（去掉最低频段，与分析阶段保持一致）
+            # Trim the lowest frequency region to stay consistent with the analysis stage.
             freq = freq[7:]
             mean_sel = mean_sel[:, 7:]
             std_sel = std_sel[:, 7:]
 
-            # 选择横轴：频率或周期
+            # Choose either frequency or period for the x-axis.
             if use_period_axis:
-                # 由于已裁剪低频，freq 不含 0；为稳健起见仍做保护
+                # The low-frequency slice has already been removed, but keep a safety check.
                 safe_freq = np.where(freq == 0, np.nan, freq)
                 x_axis = 1.0 / safe_freq
                 x_label = 'Period (tokens/cycle)'
@@ -79,7 +79,7 @@ def generate_dft_plots(analysis_dir, image_dir, baseline_analysis_dir=None, use_
                 x_axis = freq
                 x_label = 'Frequency (cycles/token)'
 
-            # 提取层号
+            # Extract the numeric layer index for the plot title and filename.
             m_layer = re.search(r"layer[ _](\d+)", layer_folder)
             layer_number = m_layer.group(1) if m_layer else layer_folder
 
@@ -104,5 +104,5 @@ def generate_dft_plots(analysis_dir, image_dir, baseline_analysis_dir=None, use_
     print(f"All required PNG plots generated in {image_dir}")
 
 if __name__ == '__main__':
-    # Example direct run (kept in sync with new output paths)
+    # Example direct run.
     generate_dft_plots(analysis_dir='output/analysis/cn_peoms', image_dir='output/image/cn_peoms')

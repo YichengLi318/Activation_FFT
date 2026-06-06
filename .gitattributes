@@ -1,4 +1,3 @@
 dataset/imdb/IMDB[[:space:]]Dataset.csv filter=lfs diff=lfs merge=lfs -text
 dataset/news/News_Category_Dataset_v3.json filter=lfs diff=lfs merge=lfs -text
 dataset/tiny_story/* filter=lfs diff=lfs merge=lfs -text
-dataset/cn_poems/* filter=lfs diff=lfs merge=lfs -text

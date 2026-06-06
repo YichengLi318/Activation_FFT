@@ -1,56 +1,86 @@
-# Fourier_Interpreter (demo)
-## 模型
-本项目现使用 `Qwen3-1.7B`（约1.7B，非量化，中文支持，LLaMA风格的纯解码器结构）。
-模型需放置在本地 `model/Qwen3-1.7B` 目录下。
-运行时会打印模型的隐藏层数、隐藏维度与注意力头数以供确认。
+# LLM DFT
 
-**版本要求**
+This repository studies frequency-domain structure in LLM hidden activations. The core workflow is intentionally narrow:
 
-- `transformers>=4.51.0`
+1. Extract hidden states from an internal layer.
+2. Apply DFT or rFFT along the token axis.
+3. Inspect amplitude and power-spectrum patterns across layers.
+4. Edit selected frequency bands and inject the signal back into the model.
+5. Compare frequency-domain perturbations with activation-domain perturbations on locality and agreement-style tasks.
 
-**显存建议**
+## What Is Kept
 
-- **FP16**：约 4 GB
-- **8-bit**：约 2.5 GB
-- **4-bit**：约 2 GB
+- `main.py`: unified entry point for activation extraction, DFT analysis, and spectral perturbation.
+- `function/activation.py`: model loading and hidden-state extraction.
+- `function/analysis.py`: DFT analysis and spectrum export.
+- `function/perturb.py`: frequency editing and round-trip injection.
+- `function/visual.py`: static spectrum plotting.
+- `scripts/run_agreement_compare.py`: main locality and agreement experiment driver.
+- `scripts/plot_locality_results.py`: plot utility for locality experiments.
+- `configs/`: experiment configuration files.
+- `results/`: curated public-facing figures and a short results summary.
 
-## 测试用例
-一个句子对，其内容为**语法(syntax)**或**数学(math)**，每个大类型下面还有多个细分类型。可以在dataset文件中查看所有测试用例。其形式如
-{
-    "catalog": "syntax",
-    "type": "Subject-Verb-Agreement",
-    "id": 1,
-    "A": "The cat sleeps on the sofa all day.",
-    "B": "The cat sleep on the sofa all day.",
-    "target_word_A": "sleeps",
-    "target_word_B": "sleep"
-}
-具有以下性质：
-1. A是正确的，而B是错误的
-2. A和B的token数相同
-3. A和B只有一个token不同，这个token标记为target_word。
-## 数据处理
-将A和B输入模型，测量每个token在每一层的激活向量，并执行FFT，激活值的频谱被保存在 `output/data` 下面。 
-将模型每一层执行所有任务产生的激活频谱绘制为可交互页面，用户可以选择单独查看不同类型任务在该层产生的激活频谱。 
-正确句子、错误句子和二者差值所对应的频谱其命名前缀分别带有sentence_A、sentence_B和diff。
-## 几个有趣的事实
-1. 在浅层，语法任务的频谱差值和数学任务没有明显区别；而在深层，语法任务的频谱差值则远大于数学任务。
-2. 在浅层和深层，频谱的幅值较小，而在中层，频谱的幅值非常大。这一点对于语法任务更加显著。
+## Repository Layout
 
-## 使用方法
-
-在本地准备好模型目录：
-
-- `model/Qwen3-1.7B/`（包含 `config.json`, `model.safetensors`, `tokenizer.json` 等文件）。
-
-运行管线：
-
-```
-python main.py --model_dir Qwen3-1.7B --fast
+```text
+LLM_DFT/
+├─ main.py
+├─ function/
+├─ scripts/
+├─ configs/
+├─ dataset/
+├─ results/
+└─ model/
 ```
 
-如需下载模型，可运行：
+`results/` is now intentionally minimal. It only contains a short summary and a small set of selected figures that are suitable for GitHub.
 
+## Quick Start
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
 ```
-python scripts/download_qwen3_1_7b.py
+
+Place the model under `model/Qwen3-1.7B/`.
+
+Run extraction on any dataset JSON available in the workspace:
+
+```bash
+python main.py --mode extract --dataset_file path/to/your_dataset.json --model_dir Qwen3-1.7B --fast
 ```
+
+Run DFT analysis and plotting:
+
+```bash
+python main.py --mode dft --dataset_file path/to/your_dataset.json
+```
+
+Run one spectral perturbation experiment:
+
+```bash
+python main.py --mode perturb --dataset_file path/to/your_dataset.json --model_dir Qwen3-1.7B --layer -1 --operation noise --noise_std 0.05 --topk 5 --max_new_tokens 10 --fast
+```
+
+`dataset_file` can point either to a file under `dataset/` or to any existing workspace-relative JSON path.
+
+## Published Results
+
+The repository does not keep full raw result archives anymore. Instead, the public `results/` folder only contains:
+
+- a compact English summary of completed experiments
+- a few selected spectrum figures for Chinese poem data
+- a few selected locality figures
+
+This keeps the repository small and easy to browse while preserving the main empirical story.
+
+## Notes
+
+- `model/` is local-only and should not be committed.
+- large datasets under `dataset/` are local-only by default
+- plotting scripts remain in the repository, but the public tree no longer ships all raw intermediate outputs they were originally generated from
+
+## Current Scope
+
+This repository is now positioned as a compact research archive and reproduction entry point rather than a dumping ground for one-off scripts and full raw outputs.
