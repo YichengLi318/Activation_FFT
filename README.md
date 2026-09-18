@@ -1,156 +1,122 @@
-# LLM DFT
+# activation-fft
 
-<<<<<<< HEAD
-This repository studies frequency-domain structure in LLM hidden activations.
+Read one layer's hidden states as a signal over token position and transform.
+Peaks are periodic patterns in what that layer represents, measured in tokens
+per cycle. Run the transform backwards mid-forward-pass to edit a frequency
+band and see what the model does differently.
 
-## Research Idea
+Any causal LM `transformers` can load, any layer.
 
-The central question of this project is whether hidden activations in a large language model admit an interpretable frequency-domain description when viewed along the token axis.
-
-The starting point is simple: for a fixed layer, the hidden state of each token can be treated as a sequence over token position. Once that sequence is available, a discrete Fourier transform can be applied dimension-wise. This produces a spectrum that describes how much of the activation energy is concentrated in different token-scale periodic patterns.
-
-This perspective is useful for two reasons.
-
-First, it gives a compact descriptive view of model behavior. Instead of inspecting only raw hidden vectors, we can inspect dominant spectral peaks, their amplitudes, and how these patterns change from shallow to deep layers. In structured text, such as Chinese regulated verse, this creates a direct bridge between observable textual rhythm and internal periodic structure in the model.
-
-Second, it gives an intervention space. After transforming activations into the frequency domain, we can selectively perturb low-frequency or high-frequency bands, invert the transform, and inject the modified activations back into the model. This lets us ask a mechanistic question: which kinds of tasks depend more strongly on global, slowly varying components, and which kinds depend more strongly on local, rapidly varying components?
-
-The full workflow is therefore:
-
-1. Extract hidden states from an internal layer.
-2. Apply DFT or rFFT along the token axis.
-3. Inspect amplitude and power-spectrum patterns across layers.
-4. Edit selected frequency bands and inject the signal back into the model.
-5. Compare frequency-domain perturbations with activation-domain perturbations on locality and agreement-style tasks.
-
-## Main Experiments
-
-### Chinese poem experiment
-
-The poem experiment studies classical Chinese verse and asks whether dominant spectral periods align with the number of characters per line. The key observation is that strong peaks appear at periods exactly matching line length: period 5 for five-character poems and period 7 for seven-character poems. This is the most direct evidence in the repository that the frequency representation is not merely a visualization trick, but captures an interpretable textual regularity that the model internally tracks.
-
-### Locality experiment
-
-The locality experiment studies how different tasks respond to perturbations in different frequency bands. The main qualitative result is asymmetric:
-
-- for detail-oriented tasks, interfering with high-frequency components causes larger degradation
-- for global tasks, interfering with low-frequency components causes larger degradation
-
-This supports the interpretation that high-frequency components carry fine-grained local information, while low-frequency components carry broader contextual structure.
-
-## What Is Kept
-
-- `main.py`: unified entry point for activation extraction, DFT analysis, and spectral perturbation.
-- `function/activation.py`: model loading and hidden-state extraction.
-- `function/analysis.py`: DFT analysis and spectrum export.
-- `function/perturb.py`: frequency editing and round-trip injection.
-- `function/visual.py`: static spectrum plotting.
-- `scripts/run_agreement_compare.py`: main locality and agreement experiment driver.
-- `scripts/plot_locality_results.py`: plot utility for locality experiments.
-- `configs/`: experiment configuration files.
-- `results/`: selected figures and a short public-facing results summary.
-
-## Repository Layout
-
-=======
-This repository studies frequency-domain structure in LLM hidden activations. The core workflow is intentionally narrow:
-
-1. Extract hidden states from an internal layer.
-2. Apply DFT or rFFT along the token axis.
-3. Inspect amplitude and power-spectrum patterns across layers.
-4. Edit selected frequency bands and inject the signal back into the model.
-5. Compare frequency-domain perturbations with activation-domain perturbations on locality and agreement-style tasks.
-
-## What Is Kept
-
-- `main.py`: unified entry point for activation extraction, DFT analysis, and spectral perturbation.
-- `function/activation.py`: model loading and hidden-state extraction.
-- `function/analysis.py`: DFT analysis and spectrum export.
-- `function/perturb.py`: frequency editing and round-trip injection.
-- `function/visual.py`: static spectrum plotting.
-- `scripts/run_agreement_compare.py`: main locality and agreement experiment driver.
-- `scripts/plot_locality_results.py`: plot utility for locality experiments.
-- `configs/`: experiment configuration files.
-- `results/`: curated public-facing figures and a short results summary.
-
-## Repository Layout
-
->>>>>>> 22216ed345cc05dfa9b66897e4e6896da6857841
-```text
-LLM_DFT/
-├─ main.py
-├─ function/
-├─ scripts/
-├─ configs/
-├─ dataset/
-├─ results/
-└─ model/
-```
-
-<<<<<<< HEAD
-`results/` contains a short summary and a small set of selected figures that are suitable for GitHub.
-=======
-`results/` is now intentionally minimal. It only contains a short summary and a small set of selected figures that are suitable for GitHub.
->>>>>>> 22216ed345cc05dfa9b66897e4e6896da6857841
-
-## Quick Start
-
-Install dependencies:
+## Install
 
 ```bash
-pip install -r requirements.txt
+pip install -e ".[plot]"
 ```
 
-Place the model under `model/Qwen3-1.7B/`.
+Python 3.9–3.13 (torch has no 3.14 build).
 
-Run extraction on any dataset JSON available in the workspace:
+## Quick start
+
+```python
+import activation_fft as af
+
+lm = af.load_model("Qwen/Qwen3-1.7B")          # Hub id or a path on disk
+acts = af.hidden_states(lm, text, layers=[20])[0][20]
+spec = af.token_spectrum(acts.values, layer=20)
+print(spec.peak())                              # (period, frequency, power)
+```
+
+A poem with seven characters per line should come back near 7.
 
 ```bash
-python main.py --mode extract --dataset_file path/to/your_dataset.json --model_dir Qwen3-1.7B --fast
+python -m activation_fft tokens   --model <m> --text "$(cat poem.txt)"
+python -m activation_fft spectrum --model <m> --text "$(cat poem.txt)" --layers 20
+python -m activation_fft sweep    --model <m> --text "$(cat poem.txt)" --out sweep.png
+python -m activation_fft bands    --model <m> --text "$(cat poem.txt)" --layers 20
 ```
 
-Run DFT analysis and plotting:
+Run `tokens` first. Any claim about a period is a claim about token positions,
+and whether a character is one token belongs to the tokenizer.
 
-```bash
-python main.py --mode dft --dataset_file path/to/your_dataset.json
+To intervene:
+
+```python
+from activation_fft import SpectralEdit, spectral_edit
+
+edit = SpectralEdit(op="bandstop", low_cutoff=0.0, high_cutoff=0.1)
+with spectral_edit(lm.model, layer=20, edit=edit):
+    out = lm.model(**inputs)      # runs with that band removed
 ```
 
-Run one spectral perturbation experiment:
+Ops: `lowpass`, `highpass`, `bandstop`, `band_attenuate`, `band_noise`,
+broadband `noise`, `act_zero` and `act_noise` as activation-domain controls,
+and `none` for the round trip alone.
 
-```bash
-python main.py --mode perturb --dataset_file path/to/your_dataset.json --model_dir Qwen3-1.7B --layer -1 --operation noise --noise_std 0.05 --topk 5 --max_new_tokens 10 --fast
+## Design
+
+**Units.** Cycles per token, 0 to 0.5. Nyquist at 0.5 puts the shortest
+resolvable period at 2 tokens. Plots default to the reciprocal, tokens per
+cycle, because that is what you can check against the text.
+
+**Resolution.** Bin spacing is `1/n_tokens`, so two periods separate only when
+`n_tokens > 1/|1/p₁ − 1/p₂|`. Telling 5 from 7 needs 18 tokens;
+`min_tokens_to_separate` computes it. This is also why a true period-7 signal
+peaks at 7.20 in a 72-token window — the nearest bins are 6.55 and 7.20.
+
+**Only real tokens.** Padded positions carry hidden states, and a near-constant
+tail loads the low bins. `token_spectrum(..., n_tokens=n)` truncates first;
+`SpectralEdit` takes the same argument. Position usually survives padding,
+prominence does not: ~200 to ~650 peak-to-median on the reference case.
+
+**Detrend and window.** Removing each dimension's mean kills DC leakage; a Hann
+window stops the first-to-last discontinuity spreading energy, at about one and
+a half bins of peak width. So an edit and an analysis using different windows
+will not agree — a band zeroed exactly reads `1.7e-14` under a boxcar and
+`3.7e-2` under Hann.
+
+**Rescale dimensions before averaging.** They differ in scale by orders of
+magnitude, so a raw average is whatever the loudest few are doing.
+`normalize_dims=True` divides each by its own standard deviation. Turn it off
+when absolute power is the point.
+
+**Depth is cheap.** One forward pass returns every layer, so a sweep costs no
+more than a single layer. Layer 0 is the first block's output, negatives count
+from the end. The embedding output is not addressable — its spectrum belongs to
+the token sequence, not the model.
+
+**The round trip is not free.** rFFT then irFFT is not exactly the identity in
+floating point, and cuFFT forces float32 at non-power-of-two lengths. Measure
+against a run with `op="none"`, not against the untouched model.
+
+**Band comparisons need matched energy.** Spectra fall off steeply, so the
+bottom bins hold most of the energy. An equal-width `bandstop` at 0.0–0.1
+removes 99.8% of a hidden state's energy; at 0.4–0.5, 0.004%. A factor of
+25,000, so the low band "wins" any comparison regardless of what it encodes —
+at the limit, delete DC and nothing is left to classify.
+`equal_power_split(spectrum, fraction)` picks cutoffs holding equal power and
+reports how much wider the high band had to be. `match_noise_std` does the
+equivalent for noise-type edits, whose energy grows with the square of the
+level. Deleting a band has a fixed cost no noise level can tune.
+
+**What this does not do.** It does not show a peak is causal; the intervention
+half does that, and only for the layer and band you edited. It does not average
+spectra of different lengths, since a bin index would mean different
+frequencies — `average_spectra` refuses. It does not do significance testing:
+compare against shuffled tokens or random weights yourself.
+
+## Layout
+
+```
+activation_fft/
+  extract.py    load a model, pull hidden states, count tokens
+  spectrum.py   the transform and the Spectrum type
+  perturb.py    spectral edits and the forward hook
+  energy.py     equal-power bands, energy-matched noise
+  plot.py       spectrum, layer sweep, band split
+  cli.py        python -m activation_fft
+examples/       two worked studies — see examples/README.md
 ```
 
-`dataset_file` can point either to a file under `dataset/` or to any existing workspace-relative JSON path.
+## License
 
-## Published Results
-
-<<<<<<< HEAD
-The public `results/` folder includes a short summary of the main findings together with a few representative figures:
-=======
-The repository does not keep full raw result archives anymore. Instead, the public `results/` folder only contains:
->>>>>>> 22216ed345cc05dfa9b66897e4e6896da6857841
-
-- a compact English summary of completed experiments
-- a few selected spectrum figures for Chinese poem data
-- a few selected locality figures
-
-<<<<<<< HEAD
-This keeps the repository easy to browse while preserving the main empirical story.
-=======
-This keeps the repository small and easy to browse while preserving the main empirical story.
->>>>>>> 22216ed345cc05dfa9b66897e4e6896da6857841
-
-## Notes
-
-- `model/` is local-only and should not be committed.
-- large datasets under `dataset/` are local-only by default
-<<<<<<< HEAD
-- plotting scripts remain in the repository and can still be used with locally generated outputs
-=======
-- plotting scripts remain in the repository, but the public tree no longer ships all raw intermediate outputs they were originally generated from
-
-## Current Scope
-
-This repository is now positioned as a compact research archive and reproduction entry point rather than a dumping ground for one-off scripts and full raw outputs.
->>>>>>> 22216ed345cc05dfa9b66897e4e6896da6857841
+MIT.

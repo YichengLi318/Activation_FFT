@@ -209,13 +209,24 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+# Local-only: weights, run outputs, corpora
 /model/
 /output/
+/dataset/
+examples/*/output/
+examples/*/dataset/*
+!examples/*/dataset/.gitkeep
+
+# Local-only: the test suite is not published
+/tests/
+
+# Editor and agent scratch
 .vscode/
+.claude/
+_tmp_*.py
+AGENT_HANDOFF_*.md
+
+# Talks and archives, local-only
+/slide/
 *.pptx
 *.tar.gz
-AGENT_HANDOFF_*.md
-_tmp_*.py
-
-# Large data files
-/dataset/*
