@@ -1,11 +1,34 @@
 # activation-fft
 
-Read one layer's hidden states as a signal over token position and transform.
-Peaks are periodic patterns in what that layer represents, measured in tokens
-per cycle. Run the transform backwards mid-forward-pass to edit a frequency
-band and see what the model does differently.
+**A spectrum view of a language model's hidden layers.**
 
-Any causal LM `transformers` can load, any layer.
+Point it at any layer of any causal LM and ask a question the usual tools
+cannot: *what repeats in here, and how often?* The answer comes back in tokens.
+
+![How activation-fft works](overview.png)
+
+## The idea
+
+A layer's hidden state is a matrix — one row per token, one column per
+dimension. Read a single column top to bottom and you have a signal sampled
+once per token. Fourier-transform it, and every peak is a periodicity whose
+length you can check against the text. A peak at 7 means that dimension repeats
+every seven tokens.
+
+Two things follow from that.
+
+**A lens.** Spectra are comparable across layers, inputs and models. You can
+watch structure appear with depth, or vanish between one prompt and the next.
+
+**A probe.** The transform is invertible, so it also runs backwards in the
+middle of a forward pass: delete a frequency band, transform back, inject at the
+same layer, and let the rest of the network finish. If behaviour changes, the
+band was carrying something the model used. If nothing changes, it wasn't.
+
+Nothing is trained, nothing is fine-tuned, and the model is used exactly as
+shipped. The figure above is not an illustration — it is this package running on
+a synthetic signal with a period of 7 planted in three of its dimensions, and
+the peak it recovers is the one it found.
 
 ## Install
 
@@ -26,18 +49,6 @@ spec = af.token_spectrum(acts.values, layer=20)
 print(spec.peak())                              # (period, frequency, power)
 ```
 
-A poem with seven characters per line should come back near 7.
-
-```bash
-python -m activation_fft tokens   --model <m> --text "$(cat poem.txt)"
-python -m activation_fft spectrum --model <m> --text "$(cat poem.txt)" --layers 20
-python -m activation_fft sweep    --model <m> --text "$(cat poem.txt)" --out sweep.png
-python -m activation_fft bands    --model <m> --text "$(cat poem.txt)" --layers 20
-```
-
-Run `tokens` first. Any claim about a period is a claim about token positions,
-and whether a character is one token belongs to the tokenizer.
-
 To intervene:
 
 ```python
@@ -52,7 +63,7 @@ Ops: `lowpass`, `highpass`, `bandstop`, `band_attenuate`, `band_noise`,
 broadband `noise`, `act_zero` and `act_noise` as activation-domain controls,
 and `none` for the round trip alone.
 
-## Design
+## Design Notes
 
 **Units.** Cycles per token, 0 to 0.5. Nyquist at 0.5 puts the shortest
 resolvable period at 2 tokens. Plots default to the reciprocal, tokens per
